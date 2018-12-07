@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Mini Gerenciador</string>
+    <string name="produtos">Produtos</string>
+    <string name="clientes">Clientes</string>
+    <string name="drawer_image">Drawer Image</string>
+    <string name="felipe_levez">Felipe Levez</string>
+    <string name="levezf_gmail_com">levezf@gmail.com</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="hint_nome">Razão Social</string>
+    <string name="hint_telefone">Telefone</string>
+    <string name="hint_e_mail">E-mail</string>
+    <string name="hint_cnpj">CNPJ</string>
+    <string name="hint_endereco">Rua</string>
+    <string name="hint_numero_endereco">Número</string>
+
+    <string name="apagar">Apagar</string>
+    <string name="salvar">Salvar</string>
+    <string name="editar">Editar</string>
+    <string name="cancelar">cancelar</string>
+
+    <string name="codigo_pais">BR</string>
+
+
+    <string name="msg_a_lista_est_vazia">A lista está vazia</string>
+    <string name="msg_preencher_todos_os_campos">Por favor, preencha todos os campos</string>
+    <string name="msg_pesquisar">Pesquisar</string>
+    <string name="msg_campo_nao_nulo">Este campo não pode ser nulo.</string>
+
+    <string name="msg_email_invalido">Informe um e-mail válido.</string>
+    <string name="msg_telefone_invalido">Informe um telefone válido.</string>
+    <string name="msg_cpf_invalido">Informe um CPF válido.</string>
+    <string name="nenhum_usuario_selecionado">Nenhum cliente selecionado</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="endereço">Endereço(Rua)</string>
+    <string name="numero">Nº</string>
+    <string name="msg_cnpj_invalido">Informe um CNPJ válido.</string>
+
+
+</resources>

@@ -1,0 +1,25 @@
+package com.example.felipelevez.aprendizadoandroid_listadeprodutos.models;
+
+import android.content.Context;
+
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.AsyncTask.AsyncTaskListaClientes;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
+
+import java.util.ArrayList;
+
+public class ListaClienteModel implements ListaClienteContrato.Model {
+
+    private ClienteDAO clienteDAO;
+    private ListaClienteContrato.Presenter presenter;
+
+    public ListaClienteModel(Context context, ListaClienteContrato.Presenter presenter) {
+        clienteDAO = new ClienteDAO(context);
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void getAll() {
+        new AsyncTaskListaClientes(clienteDAO, presenter).execute();
+    }
+}
