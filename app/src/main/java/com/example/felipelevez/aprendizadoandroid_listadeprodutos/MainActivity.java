@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         if(savedInstanceState==null){
-            inflaFragment(ProdutosFragment.newInstance());
+            inflaFragment(ListaClienteFragment.newInstance());
         }
 
         setupToolbar();

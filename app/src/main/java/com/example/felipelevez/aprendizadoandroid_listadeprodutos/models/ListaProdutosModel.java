@@ -12,6 +12,8 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.Lis
 
 import java.util.ArrayList;
 
+import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
+
 public class ListaProdutosModel implements ListaProdutosContrato.Model {
 
     private ListaProdutosContrato.Presenter presenter;
@@ -30,6 +32,6 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
 
     @Override
     public void buscaPrecosDoProdutoNoBanco(String codigoProduto) {
-        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).execute();
+        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).executeOnExecutor(THREAD_POOL_EXECUTOR);
     }
 }

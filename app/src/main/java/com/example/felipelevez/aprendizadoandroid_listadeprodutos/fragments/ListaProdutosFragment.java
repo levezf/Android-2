@@ -1,9 +1,12 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,9 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListClientes;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListProdutos;
@@ -66,37 +72,24 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
 
         this.presenter = new ListaProdutosPresenter(this, getContext());
 
-
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-       /* if(savedInstanceState==null){
+        if(savedInstanceState==null){
             if(produtos.isEmpty()){
                 presenter.buscaProdutos();
             }
         }else{
             produtos =  savedInstanceState.getParcelableArrayList(SAVED_PRODUTOS);
-        }*/
-        preenche();
+        }
+
         setupListaProdutos();
 
     }
 
-    private void preenche(){
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-        this.produtos.add(new Produto("0001", "UN", "Teste teste", "RS 70", "RS 50", 12));
-
-    }
 
     private void setupVariaveisLayout(){
         lista_produtos = view.findViewById(R.id.lista_recycler);
@@ -110,33 +103,48 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
 
         if(!produtos.isEmpty()) {
             tv_listaVazia.setVisibility(View.INVISIBLE);
-
-            Log.e("TAG - SETUP", "ENTROU NO SETUP PRODUTO NAO VAZIO");
+            lista_produtos.setHasFixedSize(true);
 
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             lista_produtos.setLayoutManager(layoutManager);
-            lista_produtos.setHasFixedSize(true);
+
             adapterListProdutos = new AdapterRecyclerListProdutos(produtos, tipo_lista);
 
-         /*   adapterListProdutos.setOnItemClickListener(new ProdutoClickListener() {
+
+            adapterListProdutos.setOnItemClickListener(new ProdutoClickListener() {
                 @Override
                 public void onProdutoClick(int position) {
-                    //abre dialog com os preços
+                    presenter.buscaPrecosDoProduto(produtos.get(position).getCodigo());
                 }
             });
-*/
             lista_produtos.setVisibility(View.VISIBLE);
             lista_produtos.setAdapter(adapterListProdutos);
 
 
-            if (getContext() != null) {
-                lista_produtos.addItemDecoration(
-                        new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-            }
         }else if(progressBar.getVisibility()==View.INVISIBLE){
             tv_listaVazia.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    @Override
+    public void showDialogListView(ArrayList<String> precos){
+
+        assert getContext()!= null;
+        AlertDialog.Builder builder=new AlertDialog.Builder(getContext());
+
+        ListView listView = new ListView(getContext());
+
+        listView.setAdapter(new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_list_item_1, precos));
+
+        builder.setCancelable(true);
+        builder.setPositiveButton("OK",null);
+        builder.setView(listView);
+        AlertDialog dialog=builder.create();
+
+        dialog.show();
     }
 
     @Override

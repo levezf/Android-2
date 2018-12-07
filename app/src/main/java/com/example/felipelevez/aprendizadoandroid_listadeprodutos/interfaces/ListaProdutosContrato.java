@@ -13,12 +13,14 @@ public interface ListaProdutosContrato {
         String tipoListaASerExibido();
         void setupListaProdutos();
         void preencheLista(ArrayList<Produto> produtos);
+        void showDialogListView(ArrayList<String> precos);
     }
     interface Presenter{
         void buscaProdutos();
         void iniciaProgressBar();
         void encerraProgressBar();
         void exibeLista(ArrayList<Produto> produtos);
+        void exibeDialogPrecos(ArrayList<String> precos);
         void buscaPrecosDoProduto(String codigo);
     }
     interface Model{

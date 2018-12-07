@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaProdutosFragment;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private final ArrayList<ListaProdutosFragment> fragmentList = new ArrayList<>();
+    private final ArrayList<Fragment> fragmentList = new ArrayList<>();
     private final ArrayList<String> fragmentTitleList = new ArrayList<>();
 
     public ViewPagerAdapter(FragmentManager manager) {
@@ -19,7 +21,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public ListaProdutosFragment getItem(int position) {
+    public Fragment getItem(int position) {
         return fragmentList.get(position);
     }
 
@@ -28,17 +30,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         return fragmentList.size();
     }
 
-    public void addFragment(ListaProdutosFragment fragment, String title) {
+    public void addFragment(Fragment fragment, String title) {
         fragmentList.add(fragment);
         fragmentTitleList.add(title);
-    }
-    public void clear(){
-        fragmentList.clear();
-        fragmentTitleList.clear();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         return fragmentTitleList.get(position);
     }
+
 }

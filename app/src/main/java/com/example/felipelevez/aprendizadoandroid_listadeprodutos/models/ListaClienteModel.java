@@ -8,6 +8,8 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Lis
 
 import java.util.ArrayList;
 
+import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
+
 public class ListaClienteModel implements ListaClienteContrato.Model {
 
     private ClienteDAO clienteDAO;
@@ -20,6 +22,6 @@ public class ListaClienteModel implements ListaClienteContrato.Model {
 
     @Override
     public void getAll() {
-        new AsyncTaskListaClientes(clienteDAO, presenter).execute();
+        new AsyncTaskListaClientes(clienteDAO, presenter).executeOnExecutor(THREAD_POOL_EXECUTOR);
     }
 }

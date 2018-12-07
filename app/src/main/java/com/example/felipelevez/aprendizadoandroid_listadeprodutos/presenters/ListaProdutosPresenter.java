@@ -44,6 +44,11 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     }
 
     @Override
+    public void exibeDialogPrecos(ArrayList<String> precos) {
+        view.showDialogListView(precos);
+    }
+
+    @Override
     public void buscaPrecosDoProduto(String codigo) {
         model.buscaPrecosDoProdutoNoBanco(codigo);
     }

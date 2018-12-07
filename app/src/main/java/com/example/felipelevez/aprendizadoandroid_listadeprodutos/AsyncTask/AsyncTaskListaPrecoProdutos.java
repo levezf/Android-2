@@ -34,7 +34,7 @@ public class AsyncTaskListaPrecoProdutos extends AsyncTask<Void, Void , ArrayLis
     @Override
     protected void onPostExecute(ArrayList<String> produtos) {
         presenter.encerraProgressBar();
-        //presenter.exibeLista(produtos);
+        presenter.exibeDialogPrecos(produtos);
     }
 
 }

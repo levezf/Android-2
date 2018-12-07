@@ -29,10 +29,10 @@ public class ProdutosFragment extends Fragment {
 
     private ViewPager viewPager;
     public static final String ARG_TIPO_DE_LISTA = "TIPO_DE_LISTA";
-    public static final String LISTA_NORMAL = "LISTA_NORMAL";
-    public static final String LISTA_PRECO_ESTOQUE = "LISTA_PRECO_ESTOQUE";
-    public static final String LISTA_LANCAMENTO = "LISTA_LANCAMENTO";
-    public static final String LISTA_PROMOCAO = "LISTA_PROMOCAO";
+    public static final String LISTA_NORMAL = "NORMAL";
+    public static final String LISTA_PRECO_ESTOQUE = "PONTA DE ESTOQUE";
+    public static final String LISTA_LANCAMENTO = "LANÇAMENTO";
+    public static final String LISTA_PROMOCAO = "PROMOÇÃO";
 
     public static ProdutosFragment newInstance(){
         return new ProdutosFragment();
@@ -73,7 +73,6 @@ public class ProdutosFragment extends Fragment {
 
         viewPager.setAdapter(adapter);
     }
-
 
     private static ListaProdutosFragment newFragmentComArgs(String tipo_de_lista){
         Bundle args = new Bundle();

@@ -5,15 +5,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ClienteClickListener;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoClickListener;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
 import java.util.ArrayList;
 import java.util.Locale;
+
 
 public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRecyclerListProdutos.ViewHolder>{
 
@@ -43,21 +45,43 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         viewHolder.codigoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getCodigo()));
 
+
         viewHolder.descricaoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getDescricao()));
 
-        viewHolder.qtdUnidadeProduto.setText(String.format(Locale.getDefault(),"%s",
-                Double.toString(produtos.get(i).getQtdEstoque())));
-
-        viewHolder.unidadeProduto.setText(String.format(Locale.getDefault(),"%s",
+        viewHolder.unidadeProduto.setText(String.format(Locale.getDefault(), "%s",
                 produtos.get(i).getUniVenda()));
 
-        viewHolder.precoMax.setText(String.format(Locale.getDefault(),"%s",
-                produtos.get(i).getValorMax()));
 
-        viewHolder.precoMin.setText(String.format(Locale.getDefault(),"%s",
-                produtos.get(i).getValorMin()));
+        viewHolder.progressBar.setVisibility(View.INVISIBLE);
 
+        viewHolder.qtdUnidadeProduto.setText(String.format(Locale.getDefault(), "%s",
+                Double.toString((int) produtos.get(i).getQtdEstoque())));
+
+        viewHolder.precoMax.setText(String.format(Locale.getDefault(), "%s",
+                "R$ " + produtos.get(i).getValorMax()));
+
+        viewHolder.precoMin.setText(String.format(Locale.getDefault(), "%s",
+                "R$ " + produtos.get(i).getValorMin()));
+
+        switch (viewHolder.tipoLista.getText().toString()){
+            case ProdutosFragment
+                    .LISTA_LANCAMENTO:
+                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.verde));
+                break;
+            case ProdutosFragment
+                    .LISTA_NORMAL:
+                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.branco));
+                break;
+            case ProdutosFragment
+                    .LISTA_PRECO_ESTOQUE:
+                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.laranja));
+                break;
+            case ProdutosFragment
+                    .LISTA_PROMOCAO:
+                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.azul));
+                break;
+        }
 
         viewHolder.bindClick(i);
     }
@@ -81,6 +105,8 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         private TextView unidadeProduto;
         private TextView precoMax;
         private TextView precoMin;
+        private ProgressBar progressBar;
+        private View itemView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +117,10 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
             unidadeProduto = itemView.findViewById(R.id.tv_unidade_produto);
             precoMax = itemView.findViewById(R.id.tv_preco_max);
             precoMin = itemView.findViewById(R.id.tv_preco_menor);
+            progressBar = itemView.findViewById(R.id.progressBar);
+            this.itemView = itemView;
+
+
 
         }
 

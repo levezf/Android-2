@@ -10,4 +10,7 @@ public interface ProdutoDAOContrato {
     ArrayList<Produto> getAll(String tipo_lista);
     ArrayList<String> getPrecosDoProduto(String codigoProduto);
     Produto bindProdutos(Cursor cursor);
+    ArrayList<Produto> buscaProdutos_ElementosBasicos(String tipo_lista);
+    String buscaPrecoProduto(String codigo, String preco);
+    Double buscaEstoqueProduto(String codigo);
 }
