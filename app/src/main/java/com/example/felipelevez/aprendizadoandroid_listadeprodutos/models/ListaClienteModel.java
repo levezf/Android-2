@@ -2,11 +2,9 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.models;
 
 import android.content.Context;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.AsyncTask.AsyncTaskListaClientes;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskListaClientes;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
-
-import java.util.ArrayList;
 
 import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
 

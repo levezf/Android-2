@@ -1,4 +1,4 @@
-package com.example.felipelevez.aprendizadoandroid_listadeprodutos.AsyncTask;
+package com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask;
 
 import android.os.AsyncTask;
 
@@ -8,17 +8,16 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 
 import java.util.ArrayList;
 
-public class AsyncTaskListaPrecoProdutos extends AsyncTask<Void, Void , ArrayList<String>> {
-
+public class AsyncTaskProdutos extends AsyncTask<Void, Void , ArrayList<Produto>> {
 
     private final ListaProdutosContrato.Presenter presenter;
     private final ProdutoDAO produtoDAO;
-    private String codigo;
+    private String tipoDeLista;
 
-    public AsyncTaskListaPrecoProdutos(ProdutoDAO produtoDAO, ListaProdutosContrato.Presenter presenter, String codigo){
+    public AsyncTaskProdutos(ProdutoDAO produtoDAO, ListaProdutosContrato.Presenter presenter, String tipoDeLista){
         this.presenter = presenter;
         this.produtoDAO = produtoDAO;
-        this.codigo = codigo;
+        this.tipoDeLista = tipoDeLista;
     }
 
     @Override
@@ -27,14 +26,13 @@ public class AsyncTaskListaPrecoProdutos extends AsyncTask<Void, Void , ArrayLis
     }
 
     @Override
-    protected ArrayList<String> doInBackground(Void... params) {
-        return produtoDAO.getPrecosDoProduto(codigo);
+    protected ArrayList<Produto> doInBackground(Void... params) {
+        return produtoDAO.getAll(tipoDeLista);
     }
 
     @Override
-    protected void onPostExecute(ArrayList<String> produtos) {
+    protected void onPostExecute(ArrayList<Produto> produtos) {
         presenter.encerraProgressBar();
-        presenter.exibeDialogPrecos(produtos);
+        presenter.exibeLista(produtos);
     }
-
 }

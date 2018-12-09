@@ -2,15 +2,10 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.models;
 
 import android.content.Context;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.AsyncTask.AsyncTaskListaPrecoProdutos;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.AsyncTask.AsyncTaskProdutos;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskListaPrecoProdutos;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskProdutos;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProdutoDAO;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ListaProdutosPresenter;
-
-import java.util.ArrayList;
 
 import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
 
