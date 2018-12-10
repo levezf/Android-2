@@ -1,16 +1,12 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +15,13 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListClientes;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListProdutos;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ClienteClickListener;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoClickListener;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ListaProdutosPresenter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ListaProdutosFragment  extends Fragment implements ListaProdutosContrato.View {
@@ -38,7 +30,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     private static final String SAVED_PRODUTOS = "save_produtos";
     private View view;
     private ArrayList<Produto> produtos = new ArrayList<>();
-    private ListaProdutosPresenter presenter;
+    private com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ListaProdutosPresenter presenter;
     private String tipo_lista = "";
     private ProgressBar progressBar;
     private RecyclerView lista_produtos;
@@ -78,6 +70,8 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        setupListaProdutos();
         if(savedInstanceState==null){
             if(produtos.isEmpty()){
                 presenter.buscaProdutos();
@@ -86,7 +80,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
             produtos =  savedInstanceState.getParcelableArrayList(SAVED_PRODUTOS);
         }
 
-        setupListaProdutos();
+
 
     }
 
@@ -101,7 +95,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public void setupListaProdutos(){
 
-        if(!produtos.isEmpty()) {
+        if(produtos.isEmpty()) {
             tv_listaVazia.setVisibility(View.INVISIBLE);
             lista_produtos.setHasFixedSize(true);
 
@@ -136,6 +130,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
 
         ListView listView = new ListView(getContext());
 
+
         listView.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_list_item_1, precos));
 
@@ -145,6 +140,22 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         AlertDialog dialog=builder.create();
 
         dialog.show();
+    }
+
+    @Override
+    public void insereItemNoAdapter(Produto produto) {
+        this.produtos.add(produto);
+        adapterListProdutos.insertItem(produto);
+    }
+
+    @Override
+    public void atualizaAdapter(int posicao_lista) {
+        adapterListProdutos.updateItem(posicao_lista);
+    }
+
+    @Override
+    public int getItemCountDoAdapter() {
+        return adapterListProdutos.getItemCount();
     }
 
     @Override

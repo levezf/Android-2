@@ -12,6 +12,11 @@ public class Produto implements Parcelable {
     private String valorMin;
     private double qtdEstoque;
 
+
+    public Produto(String codigo, String descricao){
+        this(codigo, null, descricao, null, null, -1);
+    }
+
     public Produto(String codigo, String uniVenda, String descricao, String valorMax, String valorMin, double qtdEstoque) {
         this.codigo = codigo;
         this.uniVenda = uniVenda;
@@ -20,6 +25,7 @@ public class Produto implements Parcelable {
         this.valorMin = valorMin;
         this.qtdEstoque = qtdEstoque;
     }
+
     private Produto(Parcel in){
         this.codigo = in.readString();
         this.uniVenda = in.readString();

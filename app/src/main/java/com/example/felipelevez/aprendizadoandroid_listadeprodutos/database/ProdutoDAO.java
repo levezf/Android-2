@@ -4,11 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ClienteDAOContrato;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskBuscaNomeCodigo;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoDAOContrato;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
 import java.lang.reflect.Array;
@@ -29,6 +30,13 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
     }
+
+
+    @Override
+    public void getAll(String tipo_lista, ListaProdutosContrato.Presenter presenter){
+        new AsyncTaskBuscaNomeCodigo(presenter, this.getReadableDatabase(), this, tipo_lista).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
+
 
     @Override
     public ArrayList<Produto> getAll(String tipo_lista){
@@ -128,27 +136,27 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
             }while (cursor.moveToNext());
         }
         cursor.close();
-        db.close();
+
         return precos;
     }
 
     @Override
     public Produto bindProdutos(Cursor cursor) {
 
-         return new Produto(
+        /* return new Produto(
                 cursor.getString(0),
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
                 cursor.getString(4),
-                cursor.getDouble(5));
+                cursor.getDouble(5));*/
 
 
-        /*return new Produto(
+        return new Produto(
                 cursor.getString(0),
                 cursor.getString(1),
                 cursor.getString(2),
-                null, null,-1);*/
+                null, null,-1);
     }
 
 }

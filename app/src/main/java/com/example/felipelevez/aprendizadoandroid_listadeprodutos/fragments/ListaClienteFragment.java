@@ -13,9 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.MainActivity;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListClientes;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ClienteClickListener;

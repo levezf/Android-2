@@ -27,7 +27,7 @@ public class AsyncTaskProdutos extends AsyncTask<Void, Void , ArrayList<Produto>
 
     @Override
     protected ArrayList<Produto> doInBackground(Void... params) {
-        return produtoDAO.getAll(tipoDeLista);
+        return produtoDAO.buscaProdutos_ElementosBasicos(tipoDeLista);
     }
 
     @Override

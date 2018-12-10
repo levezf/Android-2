@@ -22,6 +22,21 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     }
 
     @Override
+    public int getItemCountDoAdapter(){
+        return view.getItemCountDoAdapter();
+    }
+
+    @Override
+    public void insereItemNoAdapter(Produto produto) {
+        view.insereItemNoAdapter(produto);
+    }
+
+    @Override
+    public void atualizaAdapter(int posicao_lista) {
+        view.atualizaAdapter(posicao_lista);
+    }
+
+    @Override
     public void buscaProdutos() {
         model.buscaProdutosNoBanco(view.tipoListaASerExibido());
     }

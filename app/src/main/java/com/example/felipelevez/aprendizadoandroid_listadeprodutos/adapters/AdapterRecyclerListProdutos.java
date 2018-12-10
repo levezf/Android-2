@@ -64,6 +64,7 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         viewHolder.precoMin.setText(String.format(Locale.getDefault(), "%s",
                 "R$ " + produtos.get(i).getValorMin()));
 
+
         switch (viewHolder.tipoLista.getText().toString()){
             case ProdutosFragment
                     .LISTA_LANCAMENTO:
@@ -84,6 +85,16 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         }
 
         viewHolder.bindClick(i);
+    }
+
+    public void insertItem(Produto produto) {
+        produtos.add(produto);
+        notifyItemInserted(getItemCount());
+    }
+
+    public void updateItem(int position) {
+        Produto produto = produtos.get(position);
+        notifyItemChanged(position);
     }
 
     @Override

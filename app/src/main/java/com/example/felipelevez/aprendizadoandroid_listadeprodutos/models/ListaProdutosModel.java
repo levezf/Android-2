@@ -22,7 +22,8 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
 
     @Override
     public void  buscaProdutosNoBanco(String tipoDeLista) {
-        new AsyncTaskProdutos(produtoDAO, presenter, tipoDeLista).execute();
+        produtoDAO.getAll(tipoDeLista, presenter);
+        //new AsyncTaskProdutos(produtoDAO, presenter, tipoDeLista).execute();
     }
 
     @Override

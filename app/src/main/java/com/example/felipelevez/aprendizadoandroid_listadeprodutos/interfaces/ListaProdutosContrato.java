@@ -14,8 +14,14 @@ public interface ListaProdutosContrato {
         void setupListaProdutos();
         void preencheLista(ArrayList<Produto> produtos);
         void showDialogListView(ArrayList<String> precos);
+        void insereItemNoAdapter(Produto produto);
+        void atualizaAdapter(int posicao_lista);
+        int getItemCountDoAdapter();
     }
     interface Presenter{
+        void insereItemNoAdapter(Produto produto);
+        int getItemCountDoAdapter();
+        void atualizaAdapter(int posicao_lista);
         void buscaProdutos();
         void iniciaProgressBar();
         void encerraProgressBar();

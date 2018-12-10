@@ -1,4 +1,4 @@
-package com.example.felipelevez.aprendizadoandroid_listadeprodutos;
+package com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ProdutosFragment;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         if(savedInstanceState==null){
-            inflaFragment(ListaClienteFragment.newInstance());
+            inflaFragment(ProdutosFragment.newInstance());
         }
 
         setupToolbar();

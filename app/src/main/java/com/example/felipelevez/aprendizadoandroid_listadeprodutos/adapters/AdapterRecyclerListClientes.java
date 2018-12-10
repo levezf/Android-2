@@ -49,8 +49,6 @@ public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRec
         this.clienteClickListener = clienteClickListener;
     }
 
-
-
     public void insertItem(Cliente cliente) {
         clientes.add(cliente);
         notifyItemInserted(getItemCount());
