@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ListaProdutosPresenter;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 public class ListaProdutosFragment  extends Fragment implements ListaProdutosContrato.View {
 
@@ -57,7 +60,10 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_lista_produtos, container, false);
         this.view = view;
+        setRetainInstance (true);
+
         setupVariaveisLayout();
+
 
         if(getArguments()!=null)
             this.tipo_lista = (getArguments().getString(ProdutosFragment.ARG_TIPO_DE_LISTA));
@@ -78,6 +84,9 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
             }
         }else{
             produtos =  savedInstanceState.getParcelableArrayList(SAVED_PRODUTOS);
+            assert produtos != null;
+            adapterListProdutos.setAll(produtos);
+            adapterListProdutos.notifyDataSetChanged();
         }
 
 
@@ -95,30 +104,29 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public void setupListaProdutos(){
 
-        if(produtos.isEmpty()) {
-            tv_listaVazia.setVisibility(View.INVISIBLE);
-            lista_produtos.setHasFixedSize(true);
 
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-            lista_produtos.setLayoutManager(layoutManager);
-
-            adapterListProdutos = new AdapterRecyclerListProdutos(produtos, tipo_lista);
-            lista_produtos.setItemAnimator(null);
-
-            adapterListProdutos.setOnItemClickListener(new ProdutoClickListener() {
-                @Override
-                public void onProdutoClick(int position) {
-                    presenter.buscaPrecosDoProduto(produtos.get(position).getCodigo());
-                }
-            });
-            lista_produtos.setVisibility(View.VISIBLE);
-            lista_produtos.setAdapter(adapterListProdutos);
+        tv_listaVazia.setVisibility(View.INVISIBLE);
+        lista_produtos.setHasFixedSize(true);
 
 
-        }else if(progressBar.getVisibility()==View.INVISIBLE){
-            tv_listaVazia.setVisibility(View.VISIBLE);
-        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        lista_produtos.setLayoutManager(layoutManager);
+
+        adapterListProdutos = new AdapterRecyclerListProdutos(produtos, tipo_lista);
+        lista_produtos.setItemAnimator(null);
+
+        adapterListProdutos.setOnItemClickListener(new ProdutoClickListener() {
+            @Override
+            public void onProdutoClick(int position) {
+                presenter.buscaPrecosDoProduto(produtos.get(position).getCodigo());
+            }
+        });
+        lista_produtos.setVisibility(View.VISIBLE);
+        lista_produtos.setAdapter(adapterListProdutos);
+
+
+
 
     }
 
@@ -144,7 +152,6 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
 
     @Override
     public void insereItemNoAdapter(Produto produto) {
-        this.produtos.add(produto);
         adapterListProdutos.insertItem(produto);
     }
 

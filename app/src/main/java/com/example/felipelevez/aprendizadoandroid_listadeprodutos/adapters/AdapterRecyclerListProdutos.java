@@ -28,6 +28,7 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
     public AdapterRecyclerListProdutos(ArrayList<Produto> produtos, String tipoLista){
         this.produtos=produtos;
         this.tipoLista = tipoLista;
+        setHasStableIds(true);
     }
 
     @NonNull
@@ -50,10 +51,6 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         viewHolder.descricaoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getDescricao()));
 
-
-
-
-        viewHolder.progressBarPrecos.setVisibility(View.INVISIBLE);
 
         if(produtos.get(i).getValorMax() == null || produtos.get(i).getValorMin() == null ){
 
@@ -118,12 +115,17 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public void insertItem(Produto produto) {
-        produtos.add(produto);
+        this.produtos.add(produto);
         notifyItemInserted(getItemCount());
     }
 
@@ -135,6 +137,10 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
     @Override
     public int getItemCount(){
         return(produtos!=null)?produtos.size():0;
+    }
+
+    public void setAll(ArrayList<Produto> produtos){
+        this.produtos = produtos;
     }
 
     public void setOnItemClickListener(ProdutoClickListener produtoClickListener){
