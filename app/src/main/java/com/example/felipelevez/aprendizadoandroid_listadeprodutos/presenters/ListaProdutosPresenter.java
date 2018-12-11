@@ -1,7 +1,12 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Window;
+import android.widget.ProgressBar;
 
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.ListaClienteModel;
@@ -66,5 +71,15 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     @Override
     public void buscaPrecosDoProduto(String codigo) {
         model.buscaPrecosDoProdutoNoBanco(codigo);
+    }
+
+    @Override
+    public void iniciaProgressBarDialog() {
+        view.iniciaProgressBarDialog();
+    }
+
+    @Override
+    public void encerraProgressBarDialog() {
+        view.encerraProgressBarDialog();
     }
 }

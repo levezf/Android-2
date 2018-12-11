@@ -1,5 +1,7 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
+import android.app.Dialog;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -24,6 +27,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ListaProdutosPresenter;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static android.content.ContentValues.TAG;
 
@@ -39,6 +43,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     private RecyclerView lista_produtos;
     private TextView tv_listaVazia ;
     private AdapterRecyclerListProdutos adapterListProdutos;
+    private Dialog dialogProgressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -164,6 +169,22 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public int getItemCountDoAdapter() {
         return adapterListProdutos.getItemCount();
+    }
+
+    @Override
+    public void iniciaProgressBarDialog() {
+        dialogProgressBar = new Dialog(Objects.requireNonNull(getContext()));
+        dialogProgressBar.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogProgressBar.setContentView(R.layout.dialog);
+        dialogProgressBar.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialogProgressBar.setCancelable(false);
+        ProgressBar progressBarDialog = ProgressBar.class.cast(dialogProgressBar.findViewById(R.id.progressBar));
+        dialogProgressBar.show();
+    }
+
+    @Override
+    public void encerraProgressBarDialog() {
+        dialogProgressBar.dismiss();
     }
 
     @Override

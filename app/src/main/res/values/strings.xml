@@ -39,6 +39,7 @@
     <string name="endereço">Endereço(Rua)</string>
     <string name="numero">Nº</string>
     <string name="msg_cnpj_invalido">Informe um CNPJ válido.</string>
+    <string name="carregando">Carregando...</string>
 
 
 </resources>

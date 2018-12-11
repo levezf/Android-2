@@ -17,6 +17,9 @@ public interface ListaProdutosContrato {
         void insereItemNoAdapter(Produto produto);
         void atualizaAdapter(int posicao_lista);
         int getItemCountDoAdapter();
+
+        void iniciaProgressBarDialog();
+        void encerraProgressBarDialog();
     }
     interface Presenter{
         void insereItemNoAdapter(Produto produto);
@@ -28,6 +31,10 @@ public interface ListaProdutosContrato {
         void exibeLista(ArrayList<Produto> produtos);
         void exibeDialogPrecos(ArrayList<String> precos);
         void buscaPrecosDoProduto(String codigo);
+
+        void iniciaProgressBarDialog();
+
+        void encerraProgressBarDialog();
     }
     interface Model{
         void buscaProdutosNoBanco(String tipoDeLista);

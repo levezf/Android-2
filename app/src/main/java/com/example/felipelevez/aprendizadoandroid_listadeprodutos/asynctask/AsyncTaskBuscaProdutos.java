@@ -10,23 +10,20 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Lis
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 import static android.content.ContentValues.TAG;
 
-public class AsyncTaskBuscaNomeCodigo extends AsyncTask<Void, Produto, Void> {
+public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
 
 
     private final ListaProdutosContrato.Presenter presenter;
     private final SQLiteDatabase db;
-    private final ProdutoDAO produtoDAO;
     private final String tipoLista;
 
-    public AsyncTaskBuscaNomeCodigo(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, ProdutoDAO produtoDAO, String tipoLista) {
+    public AsyncTaskBuscaProdutos(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, String tipoLista) {
 
         this.presenter = presenter;
         this.db = db;
-        this.produtoDAO = produtoDAO;
         this.tipoLista= tipoLista;
 
     }
-
     @Override
     protected Void doInBackground(Void... voids) {
 
@@ -38,7 +35,7 @@ public class AsyncTaskBuscaNomeCodigo extends AsyncTask<Void, Produto, Void> {
                 publishProgress( new Produto(cursor.getString(0), cursor.getString(1)));
 
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(3000);
                 }catch (Exception ignored){}
 
             }while (cursor.moveToNext());

@@ -1,18 +1,15 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskBuscaNomeCodigo;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskBuscaProdutos;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoDAOContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
@@ -34,7 +31,7 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
 
     @Override
     public void getAll(String tipo_lista, ListaProdutosContrato.Presenter presenter){
-        new AsyncTaskBuscaNomeCodigo(presenter, this.getReadableDatabase(), this, tipo_lista).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new AsyncTaskBuscaProdutos(presenter, this.getReadableDatabase(), tipo_lista).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
 

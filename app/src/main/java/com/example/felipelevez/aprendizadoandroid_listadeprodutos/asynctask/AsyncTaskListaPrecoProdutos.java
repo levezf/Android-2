@@ -22,17 +22,16 @@ public class AsyncTaskListaPrecoProdutos extends AsyncTask<Void, Void , ArrayLis
 
     @Override
     protected void onPreExecute() {
-        presenter.iniciaProgressBar();
+        presenter.iniciaProgressBarDialog();
     }
 
     @Override
     protected ArrayList<String> doInBackground(Void... params) {
         return produtoDAO.getPrecosDoProduto(codigo);
     }
-
     @Override
     protected void onPostExecute(ArrayList<String> produtos) {
-        presenter.encerraProgressBar();
+        presenter.encerraProgressBarDialog();
         presenter.exibeDialogPrecos(produtos);
     }
 
