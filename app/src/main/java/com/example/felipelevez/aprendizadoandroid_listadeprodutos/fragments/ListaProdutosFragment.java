@@ -104,7 +104,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
             lista_produtos.setLayoutManager(layoutManager);
 
             adapterListProdutos = new AdapterRecyclerListProdutos(produtos, tipo_lista);
-
+            lista_produtos.setItemAnimator(null);
 
             adapterListProdutos.setOnItemClickListener(new ProdutoClickListener() {
                 @Override
@@ -151,6 +151,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public void atualizaAdapter(int posicao_lista) {
         adapterListProdutos.updateItem(posicao_lista);
+        adapterListProdutos.notifyDataSetChanged();
     }
 
     @Override

@@ -28,11 +28,6 @@ public class AsyncTaskBuscaNomeCodigo extends AsyncTask<Void, Produto, Void> {
     }
 
     @Override
-    protected void onPreExecute() {
-        presenter.iniciaProgressBar();
-    }
-
-    @Override
     protected Void doInBackground(Void... voids) {
 
 
@@ -57,15 +52,11 @@ public class AsyncTaskBuscaNomeCodigo extends AsyncTask<Void, Produto, Void> {
     protected void onProgressUpdate(Produto... values) {
 
         presenter.insereItemNoAdapter(values[0]);
-        Log.d(TAG, "Nome: "+values[0].getDescricao()+" Codigo: "+values[0].getCodigo());
 
         new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
         new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
         new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
     }
 
-    @Override
-    protected void onPostExecute(Void aVoid) {
-        presenter.encerraProgressBar();
-    }
+
 }

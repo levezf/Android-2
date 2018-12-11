@@ -14,6 +14,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Pro
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -49,20 +50,49 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         viewHolder.descricaoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getDescricao()));
 
-        viewHolder.unidadeProduto.setText(String.format(Locale.getDefault(), "%s",
-                produtos.get(i).getUniVenda()));
 
 
-        viewHolder.progressBar.setVisibility(View.INVISIBLE);
 
-        viewHolder.qtdUnidadeProduto.setText(String.format(Locale.getDefault(), "%s",
-                Double.toString((int) produtos.get(i).getQtdEstoque())));
+        viewHolder.progressBarPrecos.setVisibility(View.INVISIBLE);
 
-        viewHolder.precoMax.setText(String.format(Locale.getDefault(), "%s",
-                "R$ " + produtos.get(i).getValorMax()));
+        if(produtos.get(i).getValorMax() == null || produtos.get(i).getValorMin() == null ){
 
-        viewHolder.precoMin.setText(String.format(Locale.getDefault(), "%s",
-                "R$ " + produtos.get(i).getValorMin()));
+            viewHolder.precoMax.setVisibility(View.INVISIBLE);
+            viewHolder.precoMin.setVisibility(View.INVISIBLE);
+            viewHolder.progressBarPrecos.setVisibility(View.VISIBLE);
+
+        }else{
+            viewHolder.precoMax.setText(String.format(Locale.getDefault(), "%s",
+                    "R$ " + produtos.get(i).getValorMax()));
+
+            viewHolder.precoMin.setText(String.format(Locale.getDefault(), "%s",
+                    "R$ " + produtos.get(i).getValorMin()));
+
+            viewHolder.precoMax.setVisibility(View.VISIBLE);
+            viewHolder.precoMin.setVisibility(View.VISIBLE);
+            viewHolder.progressBarPrecos.setVisibility(View.INVISIBLE);
+        }
+
+
+        if(produtos.get(i).getQtdEstoque() == -1 || produtos.get(i).getUniVenda() == null ){
+
+            viewHolder.qtdUnidadeProduto.setVisibility(View.INVISIBLE);
+            viewHolder.unidadeProduto.setVisibility(View.INVISIBLE);
+            viewHolder.progressBarEstoque.setVisibility(View.VISIBLE);
+
+
+        }else{
+            viewHolder.unidadeProduto.setText(String.format(Locale.getDefault(), "%s",
+                    produtos.get(i).getUniVenda()));
+
+            viewHolder.qtdUnidadeProduto.setText(String.format(Locale.getDefault(), "%s",
+                    Double.toString((int) produtos.get(i).getQtdEstoque())));
+
+            viewHolder.qtdUnidadeProduto.setVisibility(View.VISIBLE);
+            viewHolder.unidadeProduto.setVisibility(View.VISIBLE);
+            viewHolder.progressBarEstoque.setVisibility(View.INVISIBLE);
+        }
+
 
 
         switch (viewHolder.tipoLista.getText().toString()){
@@ -85,6 +115,11 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         }
 
         viewHolder.bindClick(i);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position, @NonNull List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
     }
 
     public void insertItem(Produto produto) {
@@ -116,7 +151,9 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         private TextView unidadeProduto;
         private TextView precoMax;
         private TextView precoMin;
-        private ProgressBar progressBar;
+        private ProgressBar progressBarPrecos;
+        private ProgressBar progressBarEstoque;
+
         private View itemView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -128,7 +165,8 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
             unidadeProduto = itemView.findViewById(R.id.tv_unidade_produto);
             precoMax = itemView.findViewById(R.id.tv_preco_max);
             precoMin = itemView.findViewById(R.id.tv_preco_menor);
-            progressBar = itemView.findViewById(R.id.progressBar);
+            progressBarPrecos = itemView.findViewById(R.id.progressBarPrecos);
+            progressBarEstoque = itemView.findViewById(R.id.progressBarEstoque);
             this.itemView = itemView;
 
 
