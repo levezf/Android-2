@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.ViewPagerAdapter;
 
 public class ProdutosFragment extends Fragment {
@@ -37,6 +38,10 @@ public class ProdutosFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_produto, container, false);
+
+        assert getActivity()!=null;
+        ((MainActivity)getActivity()).setupNavigationDrawer();
+
 
         setupNavigationTabs(view);
 

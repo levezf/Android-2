@@ -4,66 +4,57 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.telephony.PhoneNumberFormattingTextWatcher;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListClientes;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.ViewPagerAdapter;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClientePresenter;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.utils.EditTextUtils;
 
 
-public class DetailsClienteFragment extends Fragment implements DetailsClienteContrato.View {
+public class DetailsClienteFragment extends Fragment implements DetailsClienteContrato.Parent.View {
 
     private static final String EXTRA_CLIENTE = "cliente";
     private static final String EXTRA_POSITION = "position";
+    private static final String ARG_ADAPTER = "adapter_list";
+
     private Cliente cliente;
     private int position_lista;
     private View view;
+    private ViewPager viewPager;
     private FloatingActionButton fab;
+
+    private DetailsClientePresenter presenter;
 
     public static final int INSERIR  = 1;
     public static final int REMOVER  = 2;
     public static final int EDITAR  = 3;
 
-    private EditText nome;
-    private EditText cnpj;
-    private EditText telefone;
-    private EditText email;
-    private EditText endereco_rua;
-    private EditText endereco_numero;
-
-    private TextInputLayout hintAnimationNome;
-    private TextInputLayout hintAnimationEmail;
-    private TextInputLayout hintAnimationTelefone;
-    private TextInputLayout hintAnimationCnpj;
-    private TextInputLayout hintAnimationEndereco;
-    private TextInputLayout hintAnimationNumero;
-
-
     private AdapterRecyclerListClientes adapterRecyclerListClientes;
-    private boolean vazio = false;
-    private DetailsClientePresenter presenter;
+    private DetailsClienteDadosFragment dados;
+    private DetailsClienteEmailFragment email;
+    private DetailsClienteEnderecoFragment endereco;
 
-    public DetailsClienteFragment(AdapterRecyclerListClientes adapterRecyclerListClientes) {
-        this.adapterRecyclerListClientes =adapterRecyclerListClientes;
-    }
 
     public DetailsClienteFragment() {
+
     }
+
+   /* public DetailsClienteFragment(AdapterRecyclerListClientes adapterRecyclerListClientes) {
+        this.adapterRecyclerListClientes =adapterRecyclerListClientes;
+    }*/
 
     public static DetailsClienteFragment newInstance() {
         return new DetailsClienteFragment();
@@ -81,24 +72,38 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         setHasOptionsMenu(true);
         View view =  inflater.inflate(R.layout.fragment_details_cliente, container, false);
 
+
+        assert getActivity() != null;
+        ((MainActivity) getActivity()).setupNavigationDrawerOFF();
+
+
+
         if (savedInstanceState != null){
-            assert getArguments() != null;
             cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
             position_lista = savedInstanceState.getInt(EXTRA_POSITION);
         }else{
             assert getArguments() != null;
             cliente = getArguments().getParcelable(EXTRA_CLIENTE);
             position_lista = getArguments().getInt(EXTRA_POSITION);
+            adapterRecyclerListClientes = (AdapterRecyclerListClientes)getArguments().getSerializable(ARG_ADAPTER);
         }
 
         this.view = view;
 
-        setupVariaveisFindViewById();
-        presenter = new DetailsClientePresenter(this, getContext());
-        presenter.setupOrganizacaoDeExibicao(vazio, cliente);
+        setupNavigationTabs(view);
+        setupComponentesDoLayout();
 
+        presenter = new DetailsClientePresenter(this, getContext());
+
+        executaAcaoBotaoSalvar();
 
         return view;
+    }
+
+    private void setupComponentesDoLayout(){
+        fab = view.findViewById(R.id.fab);
+        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp, getResources().newTheme()));
+
     }
 
     @Override
@@ -115,7 +120,6 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         inflater.inflate(R.menu.menu_details, menu);
     }
 
-    @Override
     public void executaAcaoBotaoSalvar() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,30 +130,29 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         });
 
     }
-    private void bindCliente(){
-        cliente.setEmail(email.getText().toString());
-        cliente.setNome(nome.getText().toString());
-        cliente.setTelefone(telefone.getText().toString());
-        cliente.setCnpj(cnpj.getText().toString());
-        cliente.setEndereco_rua(endereco_rua.getText().toString());
-        cliente.setEndereco_numero(endereco_numero.getText().toString());
-    }
 
-
-    private void msgErroCamposNulos(){
-        assert  getActivity()!=null;
-        Snackbar.make(view, R.string.msg_preencher_todos_os_campos, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+    @Override
+    public void bindCliente() {
+        dados.bindCliente();
+        email.bindCliente();
+        endereco.bindCliente();
     }
 
     @Override
-    public void adicionaMaskTelefone() {
-        telefone.addTextChangedListener(new PhoneNumberFormattingTextWatcher(getString(R.string.codigo_pais)));
-    }
+    public boolean ehDadosValidos(){
 
-    @Override
-    public void setItemNaoSelecionado(int visibilidade) {
-       // tv_item_nao_selecionado.setVisibility(visibilidade);
+        viewPager.setCurrentItem(0);
+        if(!dados.ehOperacaoValida()){
+            return false;
+        }else {
+            viewPager.setCurrentItem(1);
+            if(!email.ehOperacaoValida()){
+                return false;
+            }else{
+                viewPager.setCurrentItem(2);
+                return endereco.ehOperacaoValida();
+            }
+        }
     }
 
     @Override
@@ -165,203 +168,56 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
                 adapterRecyclerListClientes.updateItem(position_lista);
                 break;
         }
+        voltar();
     }
 
-    @Override
-    public void adicionaMaskCNPJ() {
-        cnpj.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            boolean isUpdating;
-            String old = "";
-            String maskCNPJ = "##.###.###/####-##";
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String str = (s.toString().replaceAll("[^0-9]*", ""));
-                String mask = maskCNPJ;
-
-                String mascara = "";
-                if (isUpdating) {
-                    old = str;
-                    isUpdating = false;
-                    return;
-                }
-                int i = 0;
-                for (char m : mask.toCharArray()) {
-                    if ((m != '#' && str.length() > old.length()) || (m != '#' && str.length() < old.length() && str.length() != i)) {
-                        mascara += m;
-                        continue;
-                    }
-
-                    try {
-                        mascara += str.charAt(i);
-                    } catch (Exception e) {
-                        break;
-                    }
-                    i++;
-                }
-                isUpdating = true;
-                cnpj.setText(mascara);
-                cnpj.setSelection(mascara.length());
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+    private void setupNavigationTabs(View view){
+        viewPager = view.findViewById(R.id.viewpager);
+        setupViewPager();
+        TabLayout tabLayout = view.findViewById(R.id.tabs);
+        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-    @Override
-    public boolean ehOperacaoValida() {
+    public void setupViewPager() {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        Bundle args = new Bundle();
+        args.putParcelable(EXTRA_CLIENTE, cliente);
 
-        return (!temCamposNulos(true)  &&
-                EditTextUtils.cnpjEhValido(getContext(), cnpj) &&
-                EditTextUtils.emailEhValido(getContext(), email)  &&
-                EditTextUtils.phoneEhValido(getContext(), telefone));
+        dados = DetailsClienteDadosFragment.newInstance();
+        dados.setArguments(args);
+
+        email = DetailsClienteEmailFragment.newInstance();
+        email.setArguments(args);
+
+        endereco = DetailsClienteEnderecoFragment.newInstance();
+        endereco.setArguments(args);
+
+        adapter.addFragment(dados, "DADOS");
+        adapter.addFragment(email, "E-MAIL");
+        adapter.addFragment(endereco, "ENDEREÇO");
+
+        viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
     }
 
-
-    @Override
-    public void insereValoresNosEditText() {
-        nome.setText(cliente.getNome());
-        email.setText(cliente.getEmail());
-        telefone.setText(cliente.getTelefone());
-        cnpj.setText(cliente.getCnpj());
-        endereco_rua.setText(cliente.getEndereco_rua());
-        endereco_numero.setText(cliente.getEndereco_numero());
-    }
-
-    private void setupVariaveisFindViewById() {
-        //tv_item_nao_selecionado = view.findViewById(R.id.tv_user_nao_selecionado);
-        nome = view.findViewById(R.id.et_nome);
-        email = view.findViewById(R.id.et_email);
-        telefone = view.findViewById(R.id.et_telefone);
-        cnpj = view.findViewById(R.id.et_cpf);
-        endereco_rua = view.findViewById(R.id.et_rua);
-        endereco_numero = view.findViewById(R.id.et_numero);
-        fab = view.findViewById(R.id.fab);
-        fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp, getResources().newTheme()));
-
-        hintAnimationNome = view.findViewById(R.id.hintAnimationNome);
-        hintAnimationEmail = view.findViewById(R.id.hintAnimationEmail);
-        hintAnimationTelefone = view.findViewById(R.id.hintAnimationPhone);
-        hintAnimationCnpj = view.findViewById(R.id.hintAnimationCNPJ);
-        hintAnimationEndereco = view.findViewById(R.id.hintAnimationRua);
-        hintAnimationNumero = view.findViewById(R.id.hintAnimationNumero);
-    }
-
-
-   /* private boolean ehTabletSW600() {
-        return getResources().getBoolean(R.bool.twoPaneMode);
-    }
-*/
-
-    @Override
-    public void msgUsuarioNaoSelecionado() {
-       // tv_item_nao_selecionado.setVisibility(View.VISIBLE);
-        nome.setVisibility(View.INVISIBLE);
-        email.setVisibility(View.INVISIBLE);
-        telefone.setVisibility(View.INVISIBLE);
-        endereco_rua.setVisibility(View.INVISIBLE);
-        endereco_numero.setVisibility(View.INVISIBLE);
-        cnpj.setVisibility(View.INVISIBLE);
-
-        hintAnimationEmail.setVisibility(View.INVISIBLE);
-        hintAnimationTelefone.setVisibility(View.INVISIBLE);
-        hintAnimationCnpj.setVisibility(View.INVISIBLE);
-        hintAnimationNome.setVisibility(View.INVISIBLE);
-        hintAnimationEndereco.setVisibility(View.INVISIBLE);
-        hintAnimationNumero.setVisibility(View.INVISIBLE);
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(!vazio) {
-            int id = item.getItemId();
 
-            if (id == R.id.action_apagar) {
-                if (cliente.getCodigo()!=null) {
-                    bindCliente();
-                    presenter.executaAcaoBotaoDeletar(cliente);
-                }
-                voltar();
-            }
+        int id = item.getItemId();
+
+        if (id == R.id.action_apagar) {
+
+            presenter.executaAcaoBotaoDeletar(cliente);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
     public void voltar(){
-        /*if(ehTabletSW600())
-            voltaInicioSW600();
-        else*/
-            voltaInicio();
-    }
-
-
-  /*  private void voltaInicioSW600() {
-        assert getActivity() !=null ;
-
-        ((MainActivity) getActivity()).inflaFragment(ListaClienteFragment.newInstance(), R.id.fragment_lista);
-        ((MainActivity) getActivity()).alteraUserFragment(new User(),R.id.fragment_details, true);
-    }*/
-
-    private void voltaInicio() {
         if (getActivity() != null)
-
             getActivity().getSupportFragmentManager().popBackStackImmediate();
-         //((MainActivity) getActivity()).inflaFragment(ListaClienteFragment.newInstance());
-
     }
-
-
-    private boolean temCamposNulos( boolean mErro) {
-
-        String edit1 = nome.getText().toString();
-        String edit3 = email.getText().toString();
-        String edit4 = telefone.getText().toString();
-        String edit2 = cnpj.getText().toString();
-        String edit6 = endereco_numero.getText().toString();
-        String edit5 = endereco_rua.getText().toString();
-
-        if(edit1.isEmpty() || edit2.isEmpty() || edit3.isEmpty() ||
-            edit4.isEmpty() || edit5.isEmpty() || edit6.isEmpty()) {
-            if (edit1.isEmpty()) {
-                if (mErro)
-                    nome.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-            if (edit2.isEmpty()) {
-                if (mErro)
-                    cnpj.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-            if (edit3.isEmpty()) {
-                if (mErro)
-                    email.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-            if (edit4.isEmpty()) {
-                if (mErro)
-                    telefone.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-            if (edit5.isEmpty()) {
-                if (mErro)
-                    endereco_rua.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-            if (edit6.isEmpty()) {
-                if (mErro)
-                    endereco_numero.setError(getString(R.string.msg_campo_nao_nulo));
-            }
-
-            return true;
-
-        }
-        return false;
-
-    }
-
-
 
 }

@@ -28,6 +28,7 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
 
 
     private static final String SAVED_CLIENTES = "array_clientes";
+    private static final String ARG_ADAPTER = "adapter_list";
     private ArrayList<Cliente> clientes =  new ArrayList<>();
     private View view;
 
@@ -60,6 +61,9 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
 
         this.presenter = new ListaClientePresenter(this, getContext());
         this.view = view;
+
+        assert getActivity()!=null;
+        ((MainActivity)getActivity()).setupNavigationDrawer();
 
         setupComponentesLayout();
         executaAcaoFabAdicionaCliente();
@@ -105,8 +109,10 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
 
     private void inflaDetailsCliente(Bundle args){
 
-        Fragment fragment = new DetailsClienteFragment(adapterListClientes);
+        Fragment fragment = DetailsClienteFragment.newInstance(/*adapterListClientes*/);
+        args.putSerializable(ARG_ADAPTER, adapterListClientes);
         fragment.setArguments(args);
+        assert getActivity() !=null;
         ((MainActivity)getActivity()).inflaFragment(fragment);
     }
 

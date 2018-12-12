@@ -8,9 +8,10 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Det
 
 import java.util.ArrayList;
 
-public class DetailsClienteModel implements DetailsClienteContrato.Model {
+public class DetailsClienteModel  implements  DetailsClienteContrato.Parent.Model{
 
     private ClienteDAO clienteDAO;
+
 
     public DetailsClienteModel(Context context) {
         clienteDAO = new ClienteDAO(context);

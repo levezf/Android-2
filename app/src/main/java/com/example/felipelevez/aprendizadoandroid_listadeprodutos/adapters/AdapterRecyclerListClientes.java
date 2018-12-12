@@ -12,10 +12,11 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ClienteClickListener;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRecyclerListClientes.ViewHolder> {
+public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRecyclerListClientes.ViewHolder> implements Serializable {
 
 
     private ArrayList<Cliente> clientes;

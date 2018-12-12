@@ -3,6 +3,7 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -14,7 +15,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Pro
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -90,26 +90,25 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
             viewHolder.progressBarEstoque.setVisibility(View.INVISIBLE);
         }
 
-
+        int color = viewHolder.itemView.getResources().getColor(R.color.branco);
 
         switch (viewHolder.tipoLista.getText().toString()){
             case ProdutosFragment
                     .LISTA_LANCAMENTO:
-                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.verde));
-                break;
-            case ProdutosFragment
-                    .LISTA_NORMAL:
-                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.branco));
+                color = viewHolder.itemView.getResources().getColor(R.color.verde);
                 break;
             case ProdutosFragment
                     .LISTA_PRECO_ESTOQUE:
-                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.laranja));
+                color = viewHolder.itemView.getResources().getColor(R.color.laranja);
                 break;
             case ProdutosFragment
                     .LISTA_PROMOCAO:
-                viewHolder.tipoLista.setTextColor(viewHolder.itemView.getResources().getColor(R.color.azul));
+                color = viewHolder.itemView.getResources().getColor(R.color.azul);
                 break;
         }
+
+        viewHolder.tipoLista.setTextColor(color);
+
 
         viewHolder.bindClick(i);
     }

@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.AdapterRecyclerListProdutos;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoClickListener;
@@ -29,7 +29,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.Lis
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static android.content.ContentValues.TAG;
 
 public class ListaProdutosFragment  extends Fragment implements ListaProdutosContrato.View {
 
@@ -66,6 +65,9 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         View view = inflater.inflate(R.layout.fragment_lista_produtos, container, false);
         this.view = view;
         setRetainInstance (true);
+
+        assert getActivity()!=null;
+        ((MainActivity)getActivity()).setupNavigationDrawer();
 
         setupVariaveisLayout();
 
@@ -176,7 +178,8 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         dialogProgressBar = new Dialog(Objects.requireNonNull(getContext()));
         dialogProgressBar.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialogProgressBar.setContentView(R.layout.dialog);
-        dialogProgressBar.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        Objects.requireNonNull(dialogProgressBar.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialogProgressBar.setCancelable(false);
         ProgressBar progressBarDialog = ProgressBar.class.cast(dialogProgressBar.findViewById(R.id.progressBar));
         dialogProgressBar.show();
