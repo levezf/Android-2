@@ -18,15 +18,13 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
     private final String tipoLista;
 
     public AsyncTaskBuscaProdutos(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, String tipoLista) {
-
         this.presenter = presenter;
         this.db = db;
         this.tipoLista= tipoLista;
-
     }
+
     @Override
     protected Void doInBackground(Void... voids) {
-
 
         String sqlQuery = String.format("SELECT PRO_CODIGO, PRO_DESCRICAO FROM GUA_PRODUTOS WHERE PRO_STATUS LIKE '%s' GROUP BY PRO_CODIGO ORDER BY PRO_CODIGO;", tipoLista);
         Cursor cursor = db.rawQuery(sqlQuery, null);
@@ -37,19 +35,15 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
                 try {
                     Thread.sleep(3000);
                 }catch (Exception ignored){}
-
             }while (cursor.moveToNext());
         }
         cursor.close();
-
         return null;
     }
 
     @Override
     protected void onProgressUpdate(Produto... values) {
-
         presenter.insereItemNoAdapter(values[0]);
-
         new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
         new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
         new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
