@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.DetailsClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ProdutosFragment;
@@ -77,7 +78,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Fragment currentFragmentParent;
+
+            currentFragmentParent = getSupportFragmentManager().findFragmentById(R.id.container);
+
+            if(currentFragmentParent instanceof  ListaClienteFragment  ||  currentFragmentParent instanceof DetailsClienteFragment){
+
+                getSupportFragmentManager().popBackStackImmediate();
+
+            }else  {
+                finish();
+            }
         }
     }
 
