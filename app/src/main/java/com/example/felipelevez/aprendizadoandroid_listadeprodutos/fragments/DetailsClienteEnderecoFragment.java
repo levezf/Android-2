@@ -14,8 +14,10 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
         import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
         import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClienteItensTabsPresenter;
 
+        import java.io.Serializable;
 
-public class DetailsClienteEnderecoFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View {
+
+public class DetailsClienteEnderecoFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View, Serializable {
 
     private EditText endereco_numero;
     private EditText endereco_rua;

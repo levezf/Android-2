@@ -15,8 +15,10 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
         import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClienteItensTabsPresenter;
         import com.example.felipelevez.aprendizadoandroid_listadeprodutos.utils.EditTextUtils;
 
+        import java.io.Serializable;
 
-public class DetailsClienteEmailFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View {
+
+public class DetailsClienteEmailFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View, Serializable {
 
     private EditText email;
     private static final String EXTRA_CLIENTE = "cliente";

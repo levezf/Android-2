@@ -18,8 +18,10 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClienteItensTabsPresenter;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.utils.EditTextUtils;
 
+import java.io.Serializable;
 
-public class DetailsClienteDadosFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View {
+
+public class DetailsClienteDadosFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View, Serializable {
 
     private EditText nome;
     private EditText cnpj;
@@ -47,7 +49,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         View view =  inflater.inflate(R.layout.fragment_details_cliente_dados, container, false);
 
         if (savedInstanceState != null){
-            assert getArguments() != null;
             this.cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
         }else{
             assert getArguments() != null;
@@ -56,11 +57,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
 
         this.view = view;
 
-        setupVariaveisFindViewById();
-
-        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
-        presenter.setupOrganizacaoDeExibicao(cliente);
-
         return view;
     }
 
@@ -68,6 +64,15 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EXTRA_CLIENTE, cliente);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setupVariaveisFindViewById();
+
+        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
+        presenter.setupOrganizacaoDeExibicao(cliente);
     }
 
     @Override
@@ -94,16 +99,16 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         String edit2 = cnpj.getText().toString();
         String edit3 = telefone.getText().toString();
 
-        if(edit1.isEmpty() || edit2.isEmpty()) {
+        if(edit1.isEmpty() || edit2.isEmpty() || edit3.isEmpty()) {
             if (edit1.isEmpty()) {
-                if (mErro)
+                if (mErro && nome.getError() == null)
                     nome.setError(getString(R.string.msg_campo_nao_nulo));
             }
-            if (edit2.isEmpty()) {
+            if (edit2.isEmpty() && cnpj.getError()==null) {
                 if (mErro)
                     cnpj.setError(getString(R.string.msg_campo_nao_nulo));
             }
-            if (edit3.isEmpty()) {
+            if (edit3.isEmpty() && telefone.getError()==null) {
                 if (mErro)
                     telefone.setError(getString(R.string.msg_campo_nao_nulo));
             }

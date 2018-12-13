@@ -24,11 +24,12 @@ public class AsyncTaskBuscaEstoque extends AsyncTask<Void, Produto, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         String sqlQuery = String.format("SELECT ESE_ESTOQUE FROM GUA_ESTOQUEEMPRESA WHERE GUA_ESTOQUEEMPRESA.ESE_CODIGO LIKE '%s' ORDER BY ESE_ESTOQUE DESC LIMIT 1;", produto.getCodigo());
-        Cursor cursor = db.rawQuery(sqlQuery, null);
-        if(cursor.moveToFirst()){
-            produto.setQtdEstoque((int) cursor.getDouble(0));
+        try (Cursor cursor = db.rawQuery(sqlQuery, null)) {
+            if (cursor.moveToFirst()) {
+                produto.setQtdEstoque((int) cursor.getDouble(0));
+            }
         }
-        cursor.close();
+
 
         try {
             Thread.sleep(2000);
@@ -40,5 +41,6 @@ public class AsyncTaskBuscaEstoque extends AsyncTask<Void, Produto, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         presenter.atualizaAdapter(posicao_lista);
+        onCancelled();
     }
 }

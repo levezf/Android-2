@@ -25,12 +25,14 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
     private final ListaProdutosContrato.Presenter presenter;
     private final SQLiteDatabase db;
     private final String tipoLista;
+    private Cursor cursor;
 
     public AsyncTaskBuscaProdutos(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, String tipoLista) {
 
         this.presenter = presenter;
         this.db = db;
         this.tipoLista= tipoLista;
+
     }
 
     @Override
@@ -59,5 +61,8 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
         new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }
 
-
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        onCancelled();
+    }
 }

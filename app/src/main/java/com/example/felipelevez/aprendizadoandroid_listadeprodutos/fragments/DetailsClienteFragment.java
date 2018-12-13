@@ -23,12 +23,17 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Det
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClientePresenter;
 
+import java.io.Serializable;
+
 
 public class DetailsClienteFragment extends Fragment implements DetailsClienteContrato.Parent.View {
 
     private static final String EXTRA_CLIENTE = "cliente";
     private static final String EXTRA_POSITION = "position";
     private static final String ARG_ADAPTER = "adapter_list";
+    private static final String EXTRA_FRAGMENT_DADOS = "dados_fragment";
+    private static final String EXTRA_FRAGMENT_EMAIL = "email_fragment";
+    private static final String EXTRA_FRAGMENT_ENDERECO = "endereco_fragment";
 
     private Cliente cliente;
     private int position_lista;
@@ -43,18 +48,15 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     public static final int EDITAR  = 3;
 
     private AdapterRecyclerListClientes adapterRecyclerListClientes;
-    private DetailsClienteDadosFragment dados;
-    private DetailsClienteEmailFragment email;
-    private DetailsClienteEnderecoFragment endereco;
+    private DetailsClienteDadosFragment dados = null;
+    private DetailsClienteEmailFragment email = null;
+    private DetailsClienteEnderecoFragment endereco = null;
 
 
     public DetailsClienteFragment() {
 
     }
 
-   /* public DetailsClienteFragment(AdapterRecyclerListClientes adapterRecyclerListClientes) {
-        this.adapterRecyclerListClientes =adapterRecyclerListClientes;
-    }*/
 
     public static DetailsClienteFragment newInstance() {
         return new DetailsClienteFragment();
@@ -81,6 +83,10 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         if (savedInstanceState != null){
             cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
             position_lista = savedInstanceState.getInt(EXTRA_POSITION);
+            dados= (DetailsClienteDadosFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_DADOS);
+            email= (DetailsClienteEmailFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_EMAIL);
+            endereco= (DetailsClienteEnderecoFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_ENDERECO);
+            adapterRecyclerListClientes = (AdapterRecyclerListClientes) savedInstanceState.getSerializable(ARG_ADAPTER);
         }else{
             assert getArguments() != null;
             cliente = getArguments().getParcelable(EXTRA_CLIENTE);
@@ -110,7 +116,11 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EXTRA_CLIENTE, cliente);
+        outState.putSerializable(EXTRA_FRAGMENT_DADOS, dados);
+        outState.putSerializable(EXTRA_FRAGMENT_EMAIL, email);
+        outState.putSerializable(EXTRA_FRAGMENT_ENDERECO, endereco);
         outState.putInt(EXTRA_POSITION, position_lista);
+        outState.putSerializable(ARG_ADAPTER, adapterRecyclerListClientes);
     }
 
 
@@ -181,17 +191,10 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
 
     public void setupViewPager() {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        Bundle args = new Bundle();
-        args.putParcelable(EXTRA_CLIENTE, cliente);
 
-        dados = DetailsClienteDadosFragment.newInstance();
-        dados.setArguments(args);
-
-        email = DetailsClienteEmailFragment.newInstance();
-        email.setArguments(args);
-
-        endereco = DetailsClienteEnderecoFragment.newInstance();
-        endereco.setArguments(args);
+        if(dados == null){
+            setupFragmentsViewPager();
+        }
 
         adapter.addFragment(dados, "DADOS");
         adapter.addFragment(email, "E-MAIL");
@@ -201,6 +204,18 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         viewPager.setOffscreenPageLimit(3);
     }
 
+    void setupFragmentsViewPager(){
+        Bundle args = new Bundle();
+        args.putParcelable(EXTRA_CLIENTE, cliente);
+        dados = DetailsClienteDadosFragment.newInstance();
+        dados.setArguments(args);
+
+        email = DetailsClienteEmailFragment.newInstance();
+        email.setArguments(args);
+
+        endereco = DetailsClienteEnderecoFragment.newInstance();
+        endereco.setArguments(args);
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
