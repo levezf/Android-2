@@ -11,6 +11,11 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainA
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProdutoDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
+
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import static android.content.ContentValues.TAG;
 
 public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
@@ -37,7 +42,7 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
                 publishProgress( new Produto(cursor.getString(0), cursor.getString(1)));
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 }catch (Exception ignored){}
             }while (cursor.moveToNext());
         }
@@ -48,9 +53,9 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
     @Override
     protected void onProgressUpdate(Produto... values) {
         presenter.insereItemNoAdapter(values[0]);
-        new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
-        new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
-        new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(THREAD_POOL_EXECUTOR);
+        new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(15)));
+        new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(15)));
+        new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(15)));
     }
 
 
