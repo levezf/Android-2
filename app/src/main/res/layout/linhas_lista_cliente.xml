@@ -6,6 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:focusable="true"
     android:clickable="true"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
     android:background="?android:attr/selectableItemBackground"
     android:foreground="?android:attr/selectableItemBackground">
     <TextView
