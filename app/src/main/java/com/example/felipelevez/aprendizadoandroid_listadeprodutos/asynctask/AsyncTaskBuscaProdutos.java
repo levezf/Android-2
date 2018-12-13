@@ -1,10 +1,13 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask;
 
+import android.Manifest;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProdutoDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
@@ -18,6 +21,7 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
     private final String tipoLista;
 
     public AsyncTaskBuscaProdutos(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, String tipoLista) {
+
         this.presenter = presenter;
         this.db = db;
         this.tipoLista= tipoLista;

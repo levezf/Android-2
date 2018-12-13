@@ -30,7 +30,7 @@ public class AsyncTaskBuscaEstoque extends AsyncTask<Void, Produto, Void> {
 
 
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1500);
             }catch (Exception ignored){}
 
         }

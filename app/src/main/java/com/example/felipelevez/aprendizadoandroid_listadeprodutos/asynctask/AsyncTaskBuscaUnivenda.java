@@ -37,7 +37,7 @@ public class AsyncTaskBuscaUnivenda extends AsyncTask<Void, Produto, Void>{
         if(cursor.moveToFirst()){
             produto.setUniVenda(cursor.getString(0));
             try {
-                Thread.sleep(1000);
+                Thread.sleep(1200);
             }catch (Exception ignored){}
 
         }

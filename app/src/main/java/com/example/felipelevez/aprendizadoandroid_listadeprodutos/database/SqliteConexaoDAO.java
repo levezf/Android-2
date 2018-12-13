@@ -17,7 +17,6 @@ public class SqliteConexaoDAO extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "bancomovel";
-    private static final String LOCAL_DATABASE = "/storage/self/primary/multibanco/db1/";
     private static final int DATABASE_VERSION = 1;
 
 

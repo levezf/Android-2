@@ -36,7 +36,7 @@ public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
            produto.setValorMin(cursor.getString(1));
 
            try {
-               Thread.sleep(1000);
+               Thread.sleep(800);
            }catch (Exception ignored){}
 
         }

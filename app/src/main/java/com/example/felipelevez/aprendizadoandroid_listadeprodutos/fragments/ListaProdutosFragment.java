@@ -66,8 +66,7 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         this.view = view;
         setRetainInstance (true);
 
-        assert getActivity()!=null;
-        ((MainActivity)getActivity()).setupNavigationDrawer();
+
 
         setupVariaveisLayout();
 
@@ -83,6 +82,9 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        assert getActivity()!=null;
+        ((MainActivity)getActivity()).setupNavigationDrawer();
 
         setupListaProdutos();
         if(savedInstanceState==null){
