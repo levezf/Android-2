@@ -12,6 +12,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 
 import java.util.ArrayList;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +35,7 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
 
     @Override
     public void getAll(String tipo_lista, ListaProdutosContrato.Presenter presenter){
-        new AsyncTaskBuscaProdutos(presenter, this.getReadableDatabase(), tipo_lista).executeOnExecutor(new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<Runnable>(15)));
+        new AsyncTaskBuscaProdutos(presenter, this.getReadableDatabase(), tipo_lista).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }
 
 

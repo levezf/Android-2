@@ -6,6 +6,10 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.Asyn
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProdutoDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
 
 public class ListaProdutosModel implements ListaProdutosContrato.Model {
@@ -27,6 +31,6 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
 
     @Override
     public void buscaPrecosDoProdutoNoBanco(String codigoProduto) {
-        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).executeOnExecutor(THREAD_POOL_EXECUTOR);
+        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }
 }

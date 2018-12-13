@@ -34,13 +34,13 @@ public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
         if(cursor.moveToFirst()){
            produto.setValorMax(cursor.getString(0));
            produto.setValorMin(cursor.getString(1));
-
-           try {
-               Thread.sleep(2000);
-           }catch (Exception ignored){}
-
         }
         cursor.close();
+
+        try {
+            Thread.sleep(2000);
+        }catch (Exception ignored){}
+
         return null;
 
     }

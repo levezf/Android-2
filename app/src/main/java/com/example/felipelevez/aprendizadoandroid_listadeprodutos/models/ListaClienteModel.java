@@ -6,6 +6,10 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.Asyn
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
 
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
 
 public class ListaClienteModel implements ListaClienteContrato.Model {
@@ -20,6 +24,6 @@ public class ListaClienteModel implements ListaClienteContrato.Model {
 
     @Override
     public void getAll() {
-        new AsyncTaskListaClientes(clienteDAO, presenter).executeOnExecutor(THREAD_POOL_EXECUTOR);
+        new AsyncTaskListaClientes(clienteDAO, presenter).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }
 }

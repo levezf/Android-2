@@ -36,12 +36,11 @@ public class AsyncTaskBuscaUnivenda extends AsyncTask<Void, Produto, Void>{
         Cursor cursor = db.rawQuery(sqlQuery, null);
         if(cursor.moveToFirst()){
             produto.setUniVenda(cursor.getString(0));
-            try {
-                Thread.sleep(2000);
-            }catch (Exception ignored){}
-
         }
         cursor.close();
+        try {
+            Thread.sleep(2000);
+        }catch (Exception ignored){}
         return null;
     }
 
