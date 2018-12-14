@@ -24,6 +24,8 @@ public class ListaClienteModel implements ListaClienteContrato.Model {
 
     @Override
     public void getAll() {
-        new AsyncTaskListaClientes(clienteDAO, presenter).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
+        ThreadPoolExecutor executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+        executor.allowCoreThreadTimeOut(true);
+        new AsyncTaskListaClientes(clienteDAO, presenter).executeOnExecutor(executor);
     }
 }

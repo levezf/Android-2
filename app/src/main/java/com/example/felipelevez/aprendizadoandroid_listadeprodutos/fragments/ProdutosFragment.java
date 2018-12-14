@@ -51,8 +51,6 @@ public class ProdutosFragment extends Fragment {
 
     private void setupNavigationTabs(View view){
         viewPager = view.findViewById(R.id.viewpager);
-        viewPager.setOffscreenPageLimit(0);
-
         setupViewPager();
         TabLayout tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);

@@ -56,6 +56,10 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         }
 
         this.view = view;
+        setupVariaveisFindViewById();
+
+        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
+        presenter.setupOrganizacaoDeExibicao(cliente);
 
         return view;
     }
@@ -66,14 +70,7 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         outState.putParcelable(EXTRA_CLIENTE, cliente);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setupVariaveisFindViewById();
 
-        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
-        presenter.setupOrganizacaoDeExibicao(cliente);
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,15 +99,15 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         if(edit1.isEmpty() || edit2.isEmpty() || edit3.isEmpty()) {
             if (edit1.isEmpty()) {
                 if (mErro && nome.getError() == null)
-                    nome.setError(getString(R.string.msg_campo_nao_nulo));
+                    nome.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
-            if (edit2.isEmpty() && cnpj.getError()==null) {
-                if (mErro)
-                    cnpj.setError(getString(R.string.msg_campo_nao_nulo));
+            if (edit2.isEmpty() ) {
+                if (mErro && cnpj.getError() == null)
+                    cnpj.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
-            if (edit3.isEmpty() && telefone.getError()==null) {
-                if (mErro)
-                    telefone.setError(getString(R.string.msg_campo_nao_nulo));
+            if (edit3.isEmpty() ) {
+                if (mErro && telefone.getError() == null)
+                    telefone.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
             return true;
         }

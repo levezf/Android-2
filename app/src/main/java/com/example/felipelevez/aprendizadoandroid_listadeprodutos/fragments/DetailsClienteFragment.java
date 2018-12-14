@@ -3,6 +3,7 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.Adapt
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.ViewPagerAdapter;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClientePresenter;
 
 import java.io.Serializable;
@@ -99,11 +101,17 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         setupNavigationTabs(view);
         setupComponentesDoLayout();
 
+
+
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         presenter = new DetailsClientePresenter(this, getContext());
 
         executaAcaoBotaoSalvar();
-
-        return view;
     }
 
     private void setupComponentesDoLayout(){
@@ -232,7 +240,7 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
 
     public void voltar(){
         if (getActivity() != null)
-            getActivity().getSupportFragmentManager().popBackStackImmediate();
+            getActivity().onBackPressed();
     }
 
 }

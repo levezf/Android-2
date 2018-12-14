@@ -87,9 +87,9 @@ public class DetailsClienteEmailFragment extends Fragment implements DetailsClie
         String edit1 = email.getText().toString();
 
 
-        if (edit1.isEmpty() && email.getError() == null) {
-            if (mErro)
-                email.setError(getString(R.string.msg_campo_nao_nulo));
+        if (edit1.isEmpty()) {
+            if (mErro  && email.getError() == null)
+                email.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             return true;
         }
         return false;

@@ -31,6 +31,8 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
 
     @Override
     public void buscaPrecosDoProdutoNoBanco(String codigoProduto) {
-        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
+        ThreadPoolExecutor executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+        executor.allowCoreThreadTimeOut(true);
+        new AsyncTaskListaPrecoProdutos(produtoDAO, presenter, codigoProduto).executeOnExecutor(executor);
     }
 }

@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         setupToolbar();
         setupNavigationDrawer();
+        navigationView.setCheckedItem(R.id.drawer_produtos);
+
     }
 
     void setupToolbar(){
