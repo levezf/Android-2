@@ -67,6 +67,7 @@ public class ProdutosFragment extends Fragment {
         adapter.addFragment(newFragmentComArgs(LISTA_PROMOCAO), "PROMOÇÃO");
 
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(4);
     }
 
     private static ListaProdutosFragment newFragmentComArgs(String tipo_de_lista){

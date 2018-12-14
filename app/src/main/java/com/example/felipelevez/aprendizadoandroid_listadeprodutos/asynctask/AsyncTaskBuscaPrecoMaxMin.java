@@ -48,7 +48,7 @@ public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         presenter.atualizaAdapter(posicao_lista);
-        onCancelled();
+        Thread.currentThread().interrupt();
 
     }
 }

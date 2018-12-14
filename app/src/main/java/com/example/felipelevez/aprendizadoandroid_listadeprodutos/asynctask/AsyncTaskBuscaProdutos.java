@@ -47,15 +47,18 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
                 try {
                     Thread.sleep(500);
                 }catch (Exception ignored){}
+
             }while (cursor.moveToNext());
         }
         cursor.close();
+
         return null;
     }
 
     @Override
     protected void onProgressUpdate(Produto... values) {
         presenter.insereItemNoAdapter(values[0]);
+
         new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
         new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
         new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
@@ -63,6 +66,7 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
 
     @Override
     protected void onPostExecute(Void aVoid) {
-        onCancelled();
+        Thread.currentThread().interrupt();
+
     }
 }
