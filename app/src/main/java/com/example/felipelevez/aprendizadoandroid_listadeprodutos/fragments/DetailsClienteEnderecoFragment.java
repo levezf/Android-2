@@ -89,11 +89,11 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
         String edit2 = endereco_rua.getText().toString();
 
         if(edit1.isEmpty() || edit2.isEmpty()) {
-            if (edit1.isEmpty()) {
+            if (edit1.isEmpty() && endereco_numero.getError() == null) {
                 if (mErro)
                     endereco_rua.setError(getString(R.string.msg_campo_nao_nulo));
             }
-            if (edit2.isEmpty()) {
+            if (edit2.isEmpty() && endereco_rua.getError() == null) {
                 if (mErro)
                     endereco_numero.setError(getString(R.string.msg_campo_nao_nulo));
             }
