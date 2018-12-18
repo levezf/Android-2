@@ -42,6 +42,4 @@ public interface DetailsClienteContrato {
             void removeUsuarioDoBanco(Cliente cliente);
         }
     }
-
-
 }

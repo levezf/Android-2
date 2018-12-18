@@ -19,6 +19,7 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
     public ProdutoDAO(Context context, String localDataBase) {
         super(context, localDataBase);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         super.onCreate(db);
@@ -29,13 +30,10 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
         super.onUpgrade(db, oldVersion, newVersion);
     }
 
-
     @Override
     public void getAll(String tipo_lista, ListaProdutosContrato.Presenter presenter){
         new AsyncTaskBuscaProdutos(presenter, this.getReadableDatabase(), tipo_lista).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }
-
-
 
     @Override
     public ArrayList<String> getPrecosDoProduto(String codigoProduto){

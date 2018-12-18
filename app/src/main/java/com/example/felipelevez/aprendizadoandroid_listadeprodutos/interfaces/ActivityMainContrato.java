@@ -11,12 +11,13 @@ public interface ActivityMainContrato {
 
     interface View{
     }
+
     interface Model{
         void buscaDadosDoProprietario(Proprietario proprietario, Context context);
     }
+
     interface Presenter{
         void buscaBancosDisponiveis(ArrayList<Proprietario> proprietarios, String path);
         void getProprietarios(ArrayList<Proprietario> proprietarios, Context context);
     }
-
 }

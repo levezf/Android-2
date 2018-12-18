@@ -13,8 +13,6 @@ public class Cliente implements Parcelable {
     private String endereco_rua;
     private String endereco_numero;
 
-
-
     public Cliente(String nome, String codigo, String telefone, String email, String cnpj, String endereco_rua, String endereco_numero) {
         this.nome = nome;
         this.codigo = codigo;
@@ -24,7 +22,6 @@ public class Cliente implements Parcelable {
         this.endereco_rua = endereco_rua;
         this.endereco_numero = endereco_numero;
     }
-
 
     public Cliente() {
         this(null, null, null, null, null, null, null);

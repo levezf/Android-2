@@ -13,7 +13,6 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     private final ListaProdutosContrato.View view;
     private final ListaProdutosModel model;
 
-
     public ListaProdutosPresenter(ListaProdutosContrato.View view, Context context) {
         this.view = view;
         this.model = new ListaProdutosModel(context, this);
@@ -58,9 +57,6 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     public void encerraProgressBar() {
         view.encerraProgressBar();
     }
-
-
-
 
     @Override
     public void exibeLista(ArrayList<Produto> produtos) {

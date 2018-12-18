@@ -12,7 +12,6 @@ public class Produto implements Parcelable {
     private String valorMin;
     private double qtdEstoque;
 
-
     public Produto(String codigo, String descricao){
         this(codigo, null, descricao, null, null, -1);
     }

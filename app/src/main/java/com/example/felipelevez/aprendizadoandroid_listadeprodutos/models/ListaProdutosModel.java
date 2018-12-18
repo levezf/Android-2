@@ -20,7 +20,6 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
         this.presenter = presenter;
     }
 
-
     @Override
     public void  buscaProdutosNoBanco(String tipoDeLista) {
         produtoDAO.getAll(tipoDeLista, presenter);

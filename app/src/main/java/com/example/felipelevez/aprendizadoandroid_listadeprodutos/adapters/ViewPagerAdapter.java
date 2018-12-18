@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
     private final ArrayList<Fragment> fragmentList = new ArrayList<>();
     private final ArrayList<String> fragmentTitleList = new ArrayList<>();
     private FragmentManager manager;
@@ -22,7 +23,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         return fragmentList.get(position);
     }
-
 
     @NonNull
     @Override
@@ -52,5 +52,4 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public CharSequence getPageTitle(int position) {
         return fragmentTitleList.get(position);
     }
-
 }

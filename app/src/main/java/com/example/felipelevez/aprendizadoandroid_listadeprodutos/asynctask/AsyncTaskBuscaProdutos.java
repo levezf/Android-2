@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
 
-
     private final ListaProdutosContrato.Presenter presenter;
     private final SQLiteDatabase db;
     private final String tipoLista;

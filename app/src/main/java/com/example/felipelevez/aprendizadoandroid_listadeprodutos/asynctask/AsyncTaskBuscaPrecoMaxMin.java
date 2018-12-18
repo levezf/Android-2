@@ -9,7 +9,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 
 public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
 
-
     private final ListaProdutosContrato.Presenter presenter;
     private final int posicao_lista;
     private final SQLiteDatabase db;
@@ -21,7 +20,6 @@ public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
         this.db = db;
         this.produto = produto;
     }
-
 
     @Override
     protected Void doInBackground(Void... voids) {

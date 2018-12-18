@@ -54,15 +54,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String SAVED_PROPRIETARIO = "proprietario_visivel";
     private Bundle savedInstanceState;
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
-
     private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE };
-
 
     public String getPathDataBase() {
         return proprietarioVisivel.getLocalBanco();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,7 +106,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
     }
-
     private void setupOnCreate(){
         setupFindViewByIds();
         setupToolbar();
@@ -133,8 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
-
     private void alertDialogMsgErroPermissao(){
         new AlertDialog.Builder(this).setTitle("Permissões negadas").
                 setMessage("Não será possivel continuar com a aplicação. O aplicativo será fechado.")
@@ -146,8 +140,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 })
                 .show();
     }
-
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -227,8 +219,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-
-
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -298,6 +288,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commitAllowingStateLoss();
     }
-
-
 }

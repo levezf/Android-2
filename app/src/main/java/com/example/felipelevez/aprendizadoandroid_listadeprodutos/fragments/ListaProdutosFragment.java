@@ -32,7 +32,6 @@ import java.util.Objects;
 
 public class ListaProdutosFragment  extends Fragment implements ListaProdutosContrato.View {
 
-
     private static final String SAVED_PRODUTOS = "save_produtos";
     private View view;
     private ArrayList<Produto> produtos = new ArrayList<>();
@@ -110,7 +109,6 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         tv_listaVazia.setVisibility((mostra)?View.VISIBLE:View.INVISIBLE);
     }
 
-
     private void setupVariaveisLayout(){
         lista_produtos = view.findViewById(R.id.lista_recycler);
         progressBar =  view.findViewById(R.id.progressBar);
@@ -142,9 +140,6 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         lista_produtos.setVisibility(View.VISIBLE);
         lista_produtos.setAdapter(adapterListProdutos);
     }
-
-
-
 
     @Override
     public void showDialogListView(ArrayList<String> precos){

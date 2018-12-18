@@ -27,7 +27,6 @@ public class ProdutosFragment extends Fragment {
         return new ProdutosFragment();
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -47,7 +46,6 @@ public class ProdutosFragment extends Fragment {
 
         return view;
     }
-
 
     private void setupNavigationTabs(View view){
         viewPager = view.findViewById(R.id.viewpager);
@@ -75,6 +73,4 @@ public class ProdutosFragment extends Fragment {
         produtosFragment.setArguments(args);
         return produtosFragment;
     }
-
-
 }

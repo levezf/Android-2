@@ -31,7 +31,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
     private View view;
     private DetailsClienteItensTabsPresenter presenter;
 
-
     public DetailsClienteDadosFragment() {
 
     }
@@ -39,7 +38,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
     public static DetailsClienteDadosFragment newInstance() {
         return new DetailsClienteDadosFragment();
     }
-
 
     @Nullable
     @Override
@@ -61,17 +59,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
 
         return view;
     }
-
-/*
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(EXTRA_CLIENTE, cliente);
-    }
-*/
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

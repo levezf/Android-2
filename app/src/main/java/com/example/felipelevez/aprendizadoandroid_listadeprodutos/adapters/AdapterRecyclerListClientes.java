@@ -17,7 +17,6 @@ import java.util.Locale;
 
 public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRecyclerListClientes.ViewHolder> implements Serializable {
 
-
     private ArrayList<Cliente> clientes;
     private ClienteClickListener clienteClickListener;
 
@@ -44,7 +43,6 @@ public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRec
         return (clientes!=null)? clientes.size(): 0;
     }
 
-
     public void setOnItemClickListener(ClienteClickListener clienteClickListener){
         this.clienteClickListener = clienteClickListener;
     }
@@ -64,8 +62,6 @@ public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRec
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, clientes.size());
     }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 

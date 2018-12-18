@@ -7,7 +7,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Act
 
 public class ActivityMainModel implements ActivityMainContrato.Model {
 
-
     private ProprietarioDAO proprietarioDAO;
 
     @Override

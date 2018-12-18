@@ -26,7 +26,6 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
     private View view;
     private DetailsClienteItensTabsPresenter presenter;
 
-
     public DetailsClienteEnderecoFragment() {
 
     }
@@ -34,7 +33,6 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
     public static DetailsClienteEnderecoFragment newInstance() {
         return new DetailsClienteEnderecoFragment();
     }
-
 
     @Nullable
     @Override

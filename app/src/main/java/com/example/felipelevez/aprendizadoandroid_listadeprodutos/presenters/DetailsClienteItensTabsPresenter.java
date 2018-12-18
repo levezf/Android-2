@@ -7,7 +7,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente
 
 public class DetailsClienteItensTabsPresenter implements DetailsClienteContrato.ItensTabs.Presenter {
 
-
     private DetailsClienteContrato.ItensTabs.View view;
     private Context context;
 

@@ -26,12 +26,10 @@ import java.util.ArrayList;
 
 public class ListaClienteFragment extends Fragment implements ListaClienteContrato.View {
 
-
     private static final String SAVED_CLIENTES = "array_clientes";
     private static final String ARG_ADAPTER = "adapter_list";
     private ArrayList<Cliente> clientes =  new ArrayList<>();
     private View view;
-
     private static final String EXTRA_CLIENTE = "cliente";
     private static final String EXTRA_POSITION = "position";
     private AdapterRecyclerListClientes adapterListClientes;
@@ -175,6 +173,4 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
     public void encerraProgressBar() {
         progressBar.setVisibility(View.INVISIBLE);
     }
-
-
 }

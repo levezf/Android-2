@@ -26,7 +26,6 @@ public class DetailsClienteEmailFragment extends Fragment implements DetailsClie
     private View view;
     private DetailsClienteItensTabsPresenter presenter;
 
-
     public DetailsClienteEmailFragment() {
 
     }
@@ -34,7 +33,6 @@ public class DetailsClienteEmailFragment extends Fragment implements DetailsClie
     public static DetailsClienteEmailFragment newInstance() {
         return new DetailsClienteEmailFragment();
     }
-
 
     @Nullable
     @Override

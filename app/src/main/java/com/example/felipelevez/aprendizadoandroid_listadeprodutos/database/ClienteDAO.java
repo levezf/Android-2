@@ -16,7 +16,6 @@ public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
         super(context, localDataBase);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         super.onCreate(db);
@@ -155,6 +154,4 @@ public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
         }
         return null;
     }
-
-
 }

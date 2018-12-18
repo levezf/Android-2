@@ -33,15 +33,11 @@ public interface ListaProdutosContrato {
         void exibeLista(ArrayList<Produto> produtos);
         void exibeDialogPrecos(ArrayList<String> precos);
         void buscaPrecosDoProduto(String codigo);
-
         void iniciaProgressBarDialog();
-
         void encerraProgressBarDialog();
     }
     interface Model{
         void buscaProdutosNoBanco(String tipoDeLista);
         void buscaPrecosDoProdutoNoBanco(String codigoProduto);
     }
-
-
 }

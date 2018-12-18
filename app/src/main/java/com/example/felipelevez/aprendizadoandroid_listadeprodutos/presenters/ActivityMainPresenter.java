@@ -14,7 +14,6 @@ public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
     private ActivityMainContrato.Model model;
     private ActivityMainContrato.View view;
 
-
     public ActivityMainPresenter(ActivityMainContrato.View view) {
         this.view = view;
     }
@@ -44,5 +43,4 @@ public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
             }
         }
     }
-
 }

@@ -26,6 +26,7 @@ public class Proprietario implements Parcelable {
     public void setLocalBanco(String localBanco) {
         this.localBanco = localBanco;
     }
+
     public String getCnpj() {
         return cnpj;
     }
@@ -59,6 +60,7 @@ public class Proprietario implements Parcelable {
         this.cnpj = in.readString();
         this.localBanco = in.readString();
     }
+
     public static final Creator<Proprietario> CREATOR = new Creator<Proprietario>() {
         @Override
         public Proprietario createFromParcel(Parcel in) {

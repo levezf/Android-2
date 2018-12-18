@@ -22,8 +22,6 @@ public class AsyncTaskBuscaUnivenda extends AsyncTask<Void, Produto, Void>{
         this.produto = produto;
     }
 
-
-
     @Override
     protected Void doInBackground(Void... voids) {
         String sqlQuery = String.format("SELECT PRP_UNIVENDA FROM GUA_PRECOS WHERE PRP_CODIGO LIKE '%s' LIMIT 1;", produto.getCodigo());

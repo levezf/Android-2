@@ -73,5 +73,4 @@ public class EditTextUtils {
     private static void msgErro(EditText et, String mError) {
         et.setError(mError);
     }
-
 }

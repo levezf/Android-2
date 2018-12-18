@@ -19,7 +19,6 @@ import java.util.Locale;
 
 public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRecyclerListProdutos.ViewHolder>{
 
-
     private ArrayList<Produto> produtos;
     private String tipoLista;
     private ProdutoClickListener produtoClickListener;
@@ -144,7 +143,6 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
     public void setOnItemClickListener(ProdutoClickListener produtoClickListener){
         this.produtoClickListener = produtoClickListener;
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 

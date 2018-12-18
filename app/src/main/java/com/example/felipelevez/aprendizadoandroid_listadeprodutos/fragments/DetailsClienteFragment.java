@@ -31,19 +31,15 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     private static final String EXTRA_FRAGMENT_DADOS = "dados_fragment";
     private static final String EXTRA_FRAGMENT_EMAIL = "email_fragment";
     private static final String EXTRA_FRAGMENT_ENDERECO = "endereco_fragment";
-
     private Cliente cliente;
     private int position_lista;
     private View view;
     private ViewPager viewPager;
     private FloatingActionButton fab;
-
     private DetailsClientePresenter presenter;
-
     public static final int INSERIR  = 1;
     public static final int REMOVER  = 2;
     public static final int EDITAR  = 3;
-
     private AdapterRecyclerListClientes adapterRecyclerListClientes;
     private DetailsClienteDadosFragment dados = null;
     private DetailsClienteEmailFragment email = null;
@@ -51,11 +47,9 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
-
     public DetailsClienteFragment() {
 
     }
-
 
     public static DetailsClienteFragment newInstance() {
         return new DetailsClienteFragment();
@@ -111,7 +105,6 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         outState.putSerializable(ARG_ADAPTER, adapterRecyclerListClientes);
     }
 
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
@@ -146,7 +139,6 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         email.bindCliente();
         endereco.bindCliente();
     }
-
 
     @Override
     public boolean ehDadosValidos(){
@@ -231,5 +223,4 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         if (getActivity() != null)
             getActivity().onBackPressed();
     }
-
 }

@@ -11,6 +11,7 @@ public class ProprietarioDAO extends SqliteConexaoDAO {
     public ProprietarioDAO(Context context, String localDatabase) {
         super(context, localDatabase);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         super.onCreate(db);
@@ -20,7 +21,6 @@ public class ProprietarioDAO extends SqliteConexaoDAO {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         super.onUpgrade(db, oldVersion, newVersion);
     }
-
 
     public void getProprietario(Proprietario proprietario){
 
@@ -33,5 +33,4 @@ public class ProprietarioDAO extends SqliteConexaoDAO {
         }
         cursor.close();
     }
-
 }

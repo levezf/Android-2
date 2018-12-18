@@ -10,7 +10,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Details
 
 public class DetailsClientePresenter implements DetailsClienteContrato.Parent.Presenter {
 
-
     private final DetailsClienteContrato.Parent.View view;
     private DetailsClienteModel model;
 
@@ -25,7 +24,6 @@ public class DetailsClientePresenter implements DetailsClienteContrato.Parent.Pr
         return view.getLocalDatabase();
     }
 
-
     @Override
     public void executaAcaoBotaoSalvar(Cliente cliente) {
         if(view.ehDadosValidos()){
@@ -39,7 +37,6 @@ public class DetailsClientePresenter implements DetailsClienteContrato.Parent.Pr
             }
         }
     }
-
 
     private boolean ehClienteNovo(Cliente cliente){
         return cliente.getCodigo()==null;

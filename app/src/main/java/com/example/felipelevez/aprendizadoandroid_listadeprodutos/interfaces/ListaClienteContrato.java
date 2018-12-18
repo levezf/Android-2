@@ -25,6 +25,4 @@ public interface ListaClienteContrato {
         void iniciaProgressBar();
         void encerraProgressBar();
     }
-
-
 }

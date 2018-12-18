@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class ListaClientePresenter implements ListaClienteContrato.Presenter {
 
-
     ListaClienteContrato.View view;
     ListaClienteModel model;
 
