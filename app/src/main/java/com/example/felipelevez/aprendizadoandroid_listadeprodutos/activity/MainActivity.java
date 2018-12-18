@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     protected void checkPermissions() {
-        final List<String> missingPermissions = new ArrayList<String>();
+        final List<String> missingPermissions = new ArrayList<>();
         for (final String permission : REQUIRED_SDK_PERMISSIONS) {
             final int result = ContextCompat.checkSelfPermission(this, permission);
             if (result != PackageManager.PERMISSION_GRANTED) {
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if (!missingPermissions.isEmpty()) {
             final String[] permissions = missingPermissions
-                    .toArray(new String[missingPermissions.size()]);
+                    .toArray(new String[0]);
             ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
         } else {
             final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
