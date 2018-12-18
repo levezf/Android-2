@@ -24,7 +24,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.DetailsClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaClienteFragment;
@@ -32,7 +31,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.Prod
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ActivityMainContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Proprietario;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ActivityMainPresenter;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
