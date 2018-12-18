@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
 
-    public ClienteDAO(Context context) {
-        super(context);
+    public ClienteDAO(Context context, String localDataBase) {
+        super(context, localDataBase);
     }
 
 

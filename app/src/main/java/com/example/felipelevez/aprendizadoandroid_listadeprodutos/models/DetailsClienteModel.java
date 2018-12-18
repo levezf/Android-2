@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.DetailsClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
 
 import java.util.ArrayList;
 
@@ -12,9 +13,8 @@ public class DetailsClienteModel  implements  DetailsClienteContrato.Parent.Mode
 
     private ClienteDAO clienteDAO;
 
-
-    public DetailsClienteModel(Context context) {
-        clienteDAO = new ClienteDAO(context);
+    public DetailsClienteModel(Context context, DetailsClienteContrato.Parent.Presenter presenter) {
+        clienteDAO = new ClienteDAO(context, presenter.getLocalDatabase());
     }
 
     @Override

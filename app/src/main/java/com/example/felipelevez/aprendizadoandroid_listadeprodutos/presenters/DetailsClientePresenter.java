@@ -17,12 +17,19 @@ public class DetailsClientePresenter implements DetailsClienteContrato.Parent.Pr
     public DetailsClientePresenter(DetailsClienteContrato.Parent.View view, Context context) {
 
         this.view = view;
-        this.model = new DetailsClienteModel(context);
+        this.model = new DetailsClienteModel(context, this);
     }
+
+    @Override
+    public String getLocalDatabase() {
+        return view.getLocalDatabase();
+    }
+
 
     @Override
     public void executaAcaoBotaoSalvar(Cliente cliente) {
         if(view.ehDadosValidos()){
+            view.bindCliente();
             if(ehClienteNovo(cliente)){
                 cliente.setCodigo(model.insereUsuarioNoBanco(cliente));
                 view.atualizaLista(DetailsClienteFragment.INSERIR);

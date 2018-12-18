@@ -32,6 +32,11 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     }
 
     @Override
+    public String getLocalDatabase() {
+        return view.getLocalDatabase();
+    }
+
+    @Override
     public void insereItemNoAdapter(Produto produto) {
         view.insereItemNoAdapter(produto);
     }
@@ -55,6 +60,8 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     public void encerraProgressBar() {
         view.encerraProgressBar();
     }
+
+
 
 
     @Override

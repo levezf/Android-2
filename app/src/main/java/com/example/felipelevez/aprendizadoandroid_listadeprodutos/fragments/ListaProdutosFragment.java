@@ -224,6 +224,12 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     }
 
     @Override
+    public String getLocalDatabase() {
+        assert getActivity()!=null;
+        return ((MainActivity)getActivity()).getPathDataBase();
+    }
+
+    @Override
     public void iniciaProgressBar() {
         progressBar.setVisibility(View.VISIBLE);
     }

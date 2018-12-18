@@ -40,20 +40,15 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         View view =  inflater.inflate(R.layout.fragment_details_cliente_endereco, container, false);
 
-        if (savedInstanceState != null){
-            assert getArguments() != null;
-            this.cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
-        }else{
-            assert getArguments() != null;
-            this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
-        }
-
         this.view = view;
+        setRetainInstance (true);
 
         setupVariaveisFindViewById();
+
+        assert getArguments() != null;
+        this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
 
         presenter = new DetailsClienteItensTabsPresenter(this, getContext());
         presenter.setupOrganizacaoDeExibicao(cliente);
@@ -65,11 +60,6 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EXTRA_CLIENTE, cliente);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     private void setupVariaveisFindViewById(){
@@ -91,11 +81,11 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
 
         if(edit1.isEmpty() || edit2.isEmpty()) {
             if (edit1.isEmpty() ) {
-                if (mErro && endereco_numero.getError() == null)
+                if (mErro)
                     endereco_numero.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
             if (edit2.isEmpty() ) {
-                if (mErro && endereco_rua.getError() == null)
+                if (mErro)
                     endereco_rua.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
 

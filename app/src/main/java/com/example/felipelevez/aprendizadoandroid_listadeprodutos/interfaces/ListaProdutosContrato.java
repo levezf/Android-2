@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public interface ListaProdutosContrato {
 
     interface View{
+        String getLocalDatabase();
         void iniciaProgressBar();
         void encerraProgressBar();
         String tipoListaASerExibido();
@@ -22,6 +23,7 @@ public interface ListaProdutosContrato {
         void encerraProgressBarDialog();
     }
     interface Presenter{
+        String getLocalDatabase();
         void insereItemNoAdapter(Produto produto);
         int getItemCountDoAdapter();
         void atualizaAdapter(int posicao_lista);

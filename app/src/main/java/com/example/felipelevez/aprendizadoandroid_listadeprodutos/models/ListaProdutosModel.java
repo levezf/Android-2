@@ -18,7 +18,7 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
     private ProdutoDAO produtoDAO;
 
     public ListaProdutosModel(Context context, ListaProdutosContrato.Presenter presenter) {
-        produtoDAO = new ProdutoDAO(context);
+        produtoDAO = new ProdutoDAO(context, presenter.getLocalDatabase());
         this.presenter = presenter;
     }
 
@@ -26,7 +26,6 @@ public class ListaProdutosModel implements ListaProdutosContrato.Model {
     @Override
     public void  buscaProdutosNoBanco(String tipoDeLista) {
         produtoDAO.getAll(tipoDeLista, presenter);
-        //new AsyncTaskProdutos(produtoDAO, presenter, tipoDeLista).execute();
     }
 
     @Override

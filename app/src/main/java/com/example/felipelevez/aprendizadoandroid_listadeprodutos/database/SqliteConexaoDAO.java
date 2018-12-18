@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 
 import java.io.File;
@@ -48,9 +49,11 @@ public class SqliteConexaoDAO extends SQLiteOpenHelper {
 
 
 
-    public SqliteConexaoDAO(Context context) {
-        super(context,  DATABASE_NAME, null, DATABASE_VERSION);
+    public SqliteConexaoDAO(Context context, String localDatabase) {
+
+        super(context,  localDatabase+DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

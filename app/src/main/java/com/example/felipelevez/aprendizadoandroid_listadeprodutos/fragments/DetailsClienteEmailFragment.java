@@ -42,18 +42,15 @@ public class DetailsClienteEmailFragment extends Fragment implements DetailsClie
 
 
         View view =  inflater.inflate(R.layout.fragment_details_cliente_email, container, false);
-
-        if (savedInstanceState != null){
-            assert getArguments() != null;
-            this.cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
-        }else{
-            assert getArguments() != null;
-            this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
-        }
-
         this.view = view;
+        setRetainInstance(true);
 
         setupVariaveisFindViewById();
+
+        assert getArguments() != null;
+        this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
+
+
 
         presenter = new DetailsClienteItensTabsPresenter(this, getContext());
         presenter.setupOrganizacaoDeExibicao(cliente);
@@ -86,9 +83,8 @@ public class DetailsClienteEmailFragment extends Fragment implements DetailsClie
 
         String edit1 = email.getText().toString();
 
-
         if (edit1.isEmpty()) {
-            if (mErro  && email.getError() == null)
+            if (mErro )
                 email.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             return true;
         }

@@ -18,7 +18,7 @@ public class ListaClienteModel implements ListaClienteContrato.Model {
     private ListaClienteContrato.Presenter presenter;
 
     public ListaClienteModel(Context context, ListaClienteContrato.Presenter presenter) {
-        clienteDAO = new ClienteDAO(context);
+        clienteDAO = new ClienteDAO(context, presenter.getLocalDatabase());
         this.presenter = presenter;
     }
 

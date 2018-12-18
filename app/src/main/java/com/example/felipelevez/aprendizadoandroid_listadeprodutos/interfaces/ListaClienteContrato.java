@@ -11,6 +11,7 @@ public interface ListaClienteContrato {
     }
 
     interface Presenter{
+        String getLocalDatabase();
         void iniciaProgressBar();
         void encerraProgressBar();
         void exibeLista(ArrayList<Cliente> clientes);
@@ -18,6 +19,7 @@ public interface ListaClienteContrato {
     }
 
     interface View{
+        String getLocalDatabase();
         void setupListaClientes();
         void preencheLista(ArrayList<Cliente> clientes);
         void iniciaProgressBar();

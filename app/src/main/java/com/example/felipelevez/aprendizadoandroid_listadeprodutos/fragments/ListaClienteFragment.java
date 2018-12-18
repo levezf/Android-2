@@ -70,6 +70,11 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
 
         return view;
     }
+    @Override
+    public String getLocalDatabase() {
+        assert getActivity()!=null;
+        return ((MainActivity)getActivity()).getPathDataBase();
+    }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

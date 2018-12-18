@@ -21,6 +21,11 @@ public class ListaClientePresenter implements ListaClienteContrato.Presenter {
     }
 
     @Override
+    public String getLocalDatabase() {
+        return view.getLocalDatabase();
+    }
+
+    @Override
     public void iniciaProgressBar() {
         view.iniciaProgressBar();
     }

@@ -48,15 +48,13 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
 
         View view =  inflater.inflate(R.layout.fragment_details_cliente_dados, container, false);
 
-        if (savedInstanceState != null){
-            this.cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
-        }else{
-            assert getArguments() != null;
-            this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
-        }
-
         this.view = view;
+        setRetainInstance (true);
         setupVariaveisFindViewById();
+
+        assert getArguments() != null;
+        this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
+
 
         presenter = new DetailsClienteItensTabsPresenter(this, getContext());
         presenter.setupOrganizacaoDeExibicao(cliente);
@@ -64,11 +62,14 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         return view;
     }
 
+/*
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EXTRA_CLIENTE, cliente);
     }
+*/
 
 
 
@@ -80,7 +81,7 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
     private void setupVariaveisFindViewById(){
         nome = view.findViewById(R.id.et_nome);
         cnpj = view.findViewById(R.id.et_cpf);
-        telefone = view. findViewById(R.id.et_telefone);
+        telefone = view.findViewById(R.id.et_telefone);
     }
 
     @Override
@@ -94,20 +95,20 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
 
         String edit1 = nome.getText().toString();
         String edit2 = cnpj.getText().toString();
-        String edit3 = telefone.getText().toString();
+        String edit3 =  telefone.getText().toString();
 
         if(edit1.isEmpty() || edit2.isEmpty() || edit3.isEmpty()) {
             if (edit1.isEmpty()) {
-                if (mErro && nome.getError() == null)
-                    nome.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
+                if (mErro )
+                    this.nome.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
             if (edit2.isEmpty() ) {
-                if (mErro && cnpj.getError() == null)
-                    cnpj.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
+                if (mErro )
+                    this.cnpj.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
             if (edit3.isEmpty() ) {
-                if (mErro && telefone.getError() == null)
-                    telefone.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
+                if (mErro)
+                    this.telefone.setError( view.getResources().getString(R.string.msg_campo_nao_nulo));
             }
             return true;
         }

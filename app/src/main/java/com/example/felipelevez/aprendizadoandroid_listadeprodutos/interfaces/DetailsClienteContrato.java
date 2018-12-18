@@ -24,6 +24,7 @@ public interface DetailsClienteContrato {
     interface Parent{
 
         interface View{
+            String getLocalDatabase();
             void atualizaLista(int tipoDeAtualizacao);
             void voltar();
             boolean ehDadosValidos();
@@ -32,7 +33,7 @@ public interface DetailsClienteContrato {
         }
 
         interface Presenter{
-
+            String getLocalDatabase();
             void executaAcaoBotaoSalvar(Cliente cliente);
             void executaAcaoBotaoDeletar(Cliente cliente);
         }

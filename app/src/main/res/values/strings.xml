@@ -38,6 +38,10 @@
     <string name="numero">Nº</string>
     <string name="msg_cnpj_invalido">Informe um CNPJ válido.</string>
     <string name="carregando">Carregando…</string>
+    <string name="tab_dados">DADOS</string>
+    <string name="tab_email">E-MAIL</string>
+    <string name="tab_endereco">ENDEREÇO</string>
+    <string name="altera_o_de_menus">Alteração de menus</string>
 
 
 </resources>

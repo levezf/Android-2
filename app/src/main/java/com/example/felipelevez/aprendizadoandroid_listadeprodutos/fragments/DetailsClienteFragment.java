@@ -3,18 +3,18 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity.MainActivity;
@@ -22,10 +22,9 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.Adapt
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.adapters.ViewPagerAdapter;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClientePresenter;
 
-import java.io.Serializable;
+import static android.support.constraint.Constraints.TAG;
 
 
 public class DetailsClienteFragment extends Fragment implements DetailsClienteContrato.Parent.View {
@@ -53,6 +52,8 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     private DetailsClienteDadosFragment dados = null;
     private DetailsClienteEmailFragment email = null;
     private DetailsClienteEnderecoFragment endereco = null;
+    private ViewPagerAdapter viewPagerAdapter;
+    private TabLayout tabLayout;
 
 
     public DetailsClienteFragment() {
@@ -65,57 +66,43 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         View view =  inflater.inflate(R.layout.fragment_details_cliente, container, false);
 
-
         assert getActivity() != null;
         ((MainActivity) getActivity()).setupNavigationDrawerOFF();
 
+        this.view = view;
+        setupComponentesDoLayout();
 
 
         if (savedInstanceState != null){
             cliente = savedInstanceState.getParcelable(EXTRA_CLIENTE);
             position_lista = savedInstanceState.getInt(EXTRA_POSITION);
-            dados= (DetailsClienteDadosFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_DADOS);
-            email= (DetailsClienteEmailFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_EMAIL);
-            endereco= (DetailsClienteEnderecoFragment) savedInstanceState.getSerializable(EXTRA_FRAGMENT_ENDERECO);
             adapterRecyclerListClientes = (AdapterRecyclerListClientes) savedInstanceState.getSerializable(ARG_ADAPTER);
         }else{
             assert getArguments() != null;
             cliente = getArguments().getParcelable(EXTRA_CLIENTE);
             position_lista = getArguments().getInt(EXTRA_POSITION);
             adapterRecyclerListClientes = (AdapterRecyclerListClientes)getArguments().getSerializable(ARG_ADAPTER);
+
+
         }
-
-        this.view = view;
-
         setupNavigationTabs(view);
-        setupComponentesDoLayout();
+        presenter = new DetailsClientePresenter(this, getContext());
+        executaAcaoBotaoSalvar();
 
 
 
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        presenter = new DetailsClientePresenter(this, getContext());
-
-        executaAcaoBotaoSalvar();
-    }
-
     private void setupComponentesDoLayout(){
         fab = view.findViewById(R.id.fab);
+        viewPager = view.findViewById(R.id.viewpager);
+        tabLayout = view.findViewById(R.id.tabs);
         fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_save_black_24dp, getResources().newTheme()));
 
     }
@@ -124,9 +111,6 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(EXTRA_CLIENTE, cliente);
-        outState.putSerializable(EXTRA_FRAGMENT_DADOS, dados);
-        outState.putSerializable(EXTRA_FRAGMENT_EMAIL, email);
-        outState.putSerializable(EXTRA_FRAGMENT_ENDERECO, endereco);
         outState.putInt(EXTRA_POSITION, position_lista);
         outState.putSerializable(ARG_ADAPTER, adapterRecyclerListClientes);
     }
@@ -142,19 +126,31 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bindCliente();
+
+                dados = (DetailsClienteDadosFragment) viewPagerAdapter.getItem(0);
+                email = (DetailsClienteEmailFragment) viewPagerAdapter.getItem(1);
+                endereco = (DetailsClienteEnderecoFragment) viewPagerAdapter.getItem(2);
+
                 presenter.executaAcaoBotaoSalvar(cliente);
             }
         });
 
     }
+    @Override
+    public String getLocalDatabase() {
+        assert getActivity()!=null;
+        return ((MainActivity)getActivity()).getPathDataBase();
+    }
 
     @Override
     public void bindCliente() {
+
+
         dados.bindCliente();
         email.bindCliente();
         endereco.bindCliente();
     }
+
 
     @Override
     public boolean ehDadosValidos(){
@@ -190,25 +186,22 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     }
 
     private void setupNavigationTabs(View view){
-        viewPager = view.findViewById(R.id.viewpager);
+
         setupViewPager();
-        TabLayout tabLayout = view.findViewById(R.id.tabs);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
     }
 
     public void setupViewPager() {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
 
-        if(dados == null){
-            setupFragmentsViewPager();
-        }
+        setupFragmentsViewPager();
 
-        adapter.addFragment(dados, "DADOS");
-        adapter.addFragment(email, "E-MAIL");
-        adapter.addFragment(endereco, "ENDEREÇO");
 
-        viewPager.setAdapter(adapter);
+        viewPagerAdapter.addFragment(dados, getString(R.string.tab_dados));
+        viewPagerAdapter.addFragment(email, getString(R.string.tab_email));
+        viewPagerAdapter.addFragment(endereco, getString(R.string.tab_endereco));
+        viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOffscreenPageLimit(3);
     }
 
