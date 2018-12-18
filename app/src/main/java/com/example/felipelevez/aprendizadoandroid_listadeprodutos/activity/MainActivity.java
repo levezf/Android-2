@@ -205,12 +205,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getGroupId() == R.id.menu_drawer){
             switch (id){
                 case R.id.drawer_produtos:
-                    navigationView.setCheckedItem(R.id.drawer_produtos);
                     inflaFragment(ProdutosFragment.newInstance());
                     break;
 
                 case R.id.drawer_clientes:
-                    navigationView.setCheckedItem(R.id.drawer_clientes);
                     inflaFragment(ListaClienteFragment.newInstance());
                     break;
 

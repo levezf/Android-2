@@ -94,12 +94,21 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         }else{
             produtos =  savedInstanceState.getParcelableArrayList(SAVED_PRODUTOS);
             assert produtos != null;
-            adapterListProdutos.setAll(produtos);
-            adapterListProdutos.notifyDataSetChanged();
+            if(produtos.isEmpty()){
+                mostraListaVazia(true);
+            }else{
+                mostraListaVazia(false);
+                adapterListProdutos.setAll(produtos);
+                adapterListProdutos.notifyDataSetChanged();
+            }
+
         }
 
+    }
 
-
+    @Override
+    public void mostraListaVazia(boolean mostra) {
+        tv_listaVazia.setVisibility((mostra)?View.VISIBLE:View.INVISIBLE);
     }
 
 
@@ -133,10 +142,6 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
         });
         lista_produtos.setVisibility(View.VISIBLE);
         lista_produtos.setAdapter(adapterListProdutos);
-
-
-
-
     }
 
 

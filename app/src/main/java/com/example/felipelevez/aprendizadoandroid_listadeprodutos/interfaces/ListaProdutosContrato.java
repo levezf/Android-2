@@ -18,11 +18,12 @@ public interface ListaProdutosContrato {
         void insereItemNoAdapter(Produto produto);
         void atualizaAdapter(int posicao_lista);
         int getItemCountDoAdapter();
-
+        void mostraListaVazia(boolean mostra);
         void iniciaProgressBarDialog();
         void encerraProgressBarDialog();
     }
     interface Presenter{
+        void mostraListaVazia(boolean mostra);
         String getLocalDatabase();
         void insereItemNoAdapter(Produto produto);
         int getItemCountDoAdapter();

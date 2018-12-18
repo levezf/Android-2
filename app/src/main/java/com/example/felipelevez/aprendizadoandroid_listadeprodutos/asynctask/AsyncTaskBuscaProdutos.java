@@ -26,7 +26,6 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
     private final ListaProdutosContrato.Presenter presenter;
     private final SQLiteDatabase db;
     private final String tipoLista;
-    private Cursor cursor;
 
     public AsyncTaskBuscaProdutos(ListaProdutosContrato.Presenter presenter, SQLiteDatabase db, String tipoLista) {
 
@@ -50,7 +49,8 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
                 }catch (Exception ignored){}
 
             }while (cursor.moveToNext());
-        }
+        }else
+            publishProgress( null);
         cursor.close();
 
 
@@ -59,24 +59,33 @@ public class AsyncTaskBuscaProdutos extends AsyncTask<Void, Produto, Void> {
 
     @Override
     protected void onProgressUpdate(Produto... values) {
-        presenter.insereItemNoAdapter(values[0]);
 
-        ThreadPoolExecutor executor;
-        executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
-        executor.allowCoreThreadTimeOut(true);
+        if (values == null){
+            presenter.mostraListaVazia(true);
+        }else{
 
-        new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
+            presenter.mostraListaVazia(false);
 
-        executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
-        executor.allowCoreThreadTimeOut(true);
+            presenter.insereItemNoAdapter(values[0]);
+
+            ThreadPoolExecutor executor;
+            executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+            executor.allowCoreThreadTimeOut(true);
+
+            new AsyncTaskBuscaPrecoMaxMin(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
+
+            executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+            executor.allowCoreThreadTimeOut(true);
 
 
-        new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
+            new AsyncTaskBuscaUnivenda(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
 
-        executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
-        executor.allowCoreThreadTimeOut(true);
+            executor= new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors()/2, 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>());
+            executor.allowCoreThreadTimeOut(true);
 
-        new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
+            new AsyncTaskBuscaEstoque(presenter,(presenter.getItemCountDoAdapter()-1), db, values[0]).executeOnExecutor(executor);
+        }
+
     }
 
     @Override

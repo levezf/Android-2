@@ -32,6 +32,11 @@ public class ListaProdutosPresenter implements ListaProdutosContrato.Presenter {
     }
 
     @Override
+    public void mostraListaVazia(boolean mostra) {
+        view.mostraListaVazia(mostra);
+    }
+
+    @Override
     public String getLocalDatabase() {
         return view.getLocalDatabase();
     }
