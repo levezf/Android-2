@@ -20,7 +20,7 @@ import java.util.Locale;
 public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRecyclerListProdutos.ViewHolder>{
 
     private ArrayList<Produto> produtos;
-    private String tipoLista;
+    private final String tipoLista;
     private ProdutoClickListener produtoClickListener;
 
     public AdapterRecyclerListProdutos(ArrayList<Produto> produtos, String tipoLista){
@@ -146,17 +146,17 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tipoLista;
-        private TextView codigoProduto;
-        private TextView descricaoProduto;
-        private TextView qtdUnidadeProduto;
-        private TextView unidadeProduto;
-        private TextView precoMax;
-        private TextView precoMin;
-        private ProgressBar progressBarPrecos;
-        private ProgressBar progressBarEstoque;
+        private final TextView tipoLista;
+        private final TextView codigoProduto;
+        private final TextView descricaoProduto;
+        private final TextView qtdUnidadeProduto;
+        private final TextView unidadeProduto;
+        private final TextView precoMax;
+        private final TextView precoMin;
+        private final ProgressBar progressBarPrecos;
+        private final ProgressBar progressBarEstoque;
 
-        private View itemView;
+        private final View itemView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

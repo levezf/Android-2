@@ -11,7 +11,7 @@ public class AsyncTaskListaPrecoProdutos extends AsyncTask<Void, Void , ArrayLis
 
     private final ListaProdutosContrato.Presenter presenter;
     private final ProdutoDAO produtoDAO;
-    private String codigo;
+    private final String codigo;
 
     public AsyncTaskListaPrecoProdutos(ProdutoDAO produtoDAO, ListaProdutosContrato.Presenter presenter, String codigo){
         this.presenter = presenter;

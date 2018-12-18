@@ -45,12 +45,6 @@ public class ListaClienteFragment extends Fragment implements ListaClienteContra
 
     private FloatingActionButton fab_adicionaCliente;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

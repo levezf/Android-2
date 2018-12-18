@@ -43,13 +43,6 @@ public class ListaProdutosFragment  extends Fragment implements ListaProdutosCon
     private AdapterRecyclerListProdutos adapterListProdutos;
     private Dialog dialogProgressBar;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
-
     public ListaProdutosFragment() {
 
     }

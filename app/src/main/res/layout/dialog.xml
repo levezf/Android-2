@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:minWidth="555dp"
-    >
+    android:minWidth="555dp">
+
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         tools:ignore="UselessParent">
+
         <ProgressBar
             android:id="@+id/progressBar"
             android:indeterminate="true"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1" />
+
     </LinearLayout>
+
 </RelativeLayout>

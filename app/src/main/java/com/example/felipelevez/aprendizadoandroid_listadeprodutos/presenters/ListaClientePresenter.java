@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class ListaClientePresenter implements ListaClienteContrato.Presenter {
 
-    ListaClienteContrato.View view;
-    ListaClienteModel model;
+    final ListaClienteContrato.View view;
+    final ListaClienteModel model;
 
     public ListaClientePresenter(ListaClienteContrato.View view, Context context) {
 

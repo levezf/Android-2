@@ -12,16 +12,6 @@ public class ProprietarioDAO extends SqliteConexaoDAO {
         super(context, localDatabase);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        super.onCreate(db);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onUpgrade(db, oldVersion, newVersion);
-    }
-
     public void getProprietario(Proprietario proprietario){
 
         String sql_query = "SELECT PAR_NOME, PAR_CNPJEMPRESA FROM GUA_PARAMETROS;";

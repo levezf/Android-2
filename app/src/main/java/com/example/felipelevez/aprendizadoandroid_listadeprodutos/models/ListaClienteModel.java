@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ListaClienteModel implements ListaClienteContrato.Model {
 
-    private ClienteDAO clienteDAO;
-    private ListaClienteContrato.Presenter presenter;
+    private final ClienteDAO clienteDAO;
+    private final ListaClienteContrato.Presenter presenter;
 
     public ListaClienteModel(Context context, ListaClienteContrato.Presenter presenter) {
         clienteDAO = new ClienteDAO(context, presenter.getLocalDatabase());

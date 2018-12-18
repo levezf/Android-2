@@ -17,16 +17,6 @@ public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        super.onCreate(db);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onUpgrade(db, oldVersion, newVersion);
-    }
-
-    @Override
     public String insert(Cliente cliente) {
         SQLiteDatabase db = this.getWritableDatabase();
 

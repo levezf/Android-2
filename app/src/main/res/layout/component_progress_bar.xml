@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <ProgressBar
     android:id="@+id/progressBar"
     style="?android:attr/progressBarStyle"

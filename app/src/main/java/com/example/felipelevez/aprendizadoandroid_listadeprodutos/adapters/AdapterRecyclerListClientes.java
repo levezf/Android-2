@@ -17,7 +17,7 @@ import java.util.Locale;
 
 public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRecyclerListClientes.ViewHolder> implements Serializable {
 
-    private ArrayList<Cliente> clientes;
+    private final ArrayList<Cliente> clientes;
     private ClienteClickListener clienteClickListener;
 
     public AdapterRecyclerListClientes(ArrayList<Cliente> clientes) {
@@ -65,7 +65,7 @@ public class AdapterRecyclerListClientes extends RecyclerView.Adapter<AdapterRec
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView tv_nome;
+        private final TextView tv_nome;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

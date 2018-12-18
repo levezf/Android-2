@@ -29,7 +29,6 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
     private static final String EXTRA_CLIENTE = "cliente";
     private Cliente cliente;
     private View view;
-    private DetailsClienteItensTabsPresenter presenter;
 
     public DetailsClienteDadosFragment() {
 
@@ -54,15 +53,10 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
         this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
 
 
-        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
+        DetailsClienteItensTabsPresenter presenter = new DetailsClienteItensTabsPresenter(this);
         presenter.setupOrganizacaoDeExibicao(cliente);
 
         return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     private void setupVariaveisFindViewById(){
@@ -113,7 +107,7 @@ public class DetailsClienteDadosFragment extends Fragment implements DetailsClie
 
             boolean isUpdating;
             String old = "";
-            String maskCNPJ = "##.###.###/####-##";
+            final String maskCNPJ = "##.###.###/####-##";
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 String str = (s.toString().replaceAll("[^0-9]*", ""));

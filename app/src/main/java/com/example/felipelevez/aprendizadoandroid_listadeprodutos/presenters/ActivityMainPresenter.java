@@ -11,8 +11,7 @@ import java.util.ArrayList;
 
 public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
 
-    private ActivityMainContrato.Model model;
-    private ActivityMainContrato.View view;
+    private final ActivityMainContrato.View view;
 
     public ActivityMainPresenter(ActivityMainContrato.View view) {
         this.view = view;
@@ -20,7 +19,7 @@ public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
 
     public void getProprietarios(ArrayList<Proprietario> proprietarios, Context context){
 
-        model = new ActivityMainModel();
+        ActivityMainContrato.Model model = new ActivityMainModel();
 
         for (Proprietario p : proprietarios) {
             model.buscaDadosDoProprietario(p, context);

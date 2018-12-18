@@ -21,16 +21,6 @@ public class ProdutoDAO extends SqliteConexaoDAO implements ProdutoDAOContrato {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        super.onCreate(db);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        super.onUpgrade(db, oldVersion, newVersion);
-    }
-
-    @Override
     public void getAll(String tipo_lista, ListaProdutosContrato.Presenter presenter){
         new AsyncTaskBuscaProdutos(presenter, this.getReadableDatabase(), tipo_lista).executeOnExecutor(new ThreadPoolExecutor( 1,  Runtime.getRuntime().availableProcessors(), 1, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>()));
     }

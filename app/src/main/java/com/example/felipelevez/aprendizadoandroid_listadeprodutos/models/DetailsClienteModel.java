@@ -7,7 +7,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.Det
 
 public class DetailsClienteModel  implements  DetailsClienteContrato.Parent.Model{
 
-    private ClienteDAO clienteDAO;
+    private final ClienteDAO clienteDAO;
 
     public DetailsClienteModel(Context context, DetailsClienteContrato.Parent.Presenter presenter) {
         clienteDAO = new ClienteDAO(context, presenter.getLocalDatabase());

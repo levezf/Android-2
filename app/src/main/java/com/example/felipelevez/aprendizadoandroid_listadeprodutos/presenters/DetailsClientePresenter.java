@@ -11,7 +11,7 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Details
 public class DetailsClientePresenter implements DetailsClienteContrato.Parent.Presenter {
 
     private final DetailsClienteContrato.Parent.View view;
-    private DetailsClienteModel model;
+    private final DetailsClienteModel model;
 
     public DetailsClientePresenter(DetailsClienteContrato.Parent.View view, Context context) {
 

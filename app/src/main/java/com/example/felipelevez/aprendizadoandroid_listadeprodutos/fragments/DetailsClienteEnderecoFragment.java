@@ -24,7 +24,6 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
     private static final String EXTRA_CLIENTE = "cliente";
     private Cliente cliente;
     private View view;
-    private DetailsClienteItensTabsPresenter presenter;
 
     public DetailsClienteEnderecoFragment() {
 
@@ -48,7 +47,7 @@ public class DetailsClienteEnderecoFragment extends Fragment implements DetailsC
         assert getArguments() != null;
         this.cliente = getArguments().getParcelable(EXTRA_CLIENTE);
 
-        presenter = new DetailsClienteItensTabsPresenter(this, getContext());
+        DetailsClienteItensTabsPresenter presenter = new DetailsClienteItensTabsPresenter(this);
         presenter.setupOrganizacaoDeExibicao(cliente);
 
         return view;
