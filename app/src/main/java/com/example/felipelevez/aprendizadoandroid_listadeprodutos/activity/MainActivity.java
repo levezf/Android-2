@@ -40,7 +40,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityMainContrato.View, ActivityCompat.OnRequestPermissionsResultCallback {
 
     private static final String SAVED_PROPRIETARIOS = "proprietarios";
-    private FragmentManager fragmentManager;
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private ActionBarDrawerToggle toggle;
@@ -52,10 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Proprietario> proprietarios = new ArrayList<>();
     private CardView header;
     private Proprietario proprietarioVisivel;
-    private ActivityMainPresenter presenter;
     private static final String SAVED_PROPRIETARIO = "proprietario_visivel";
-    private static final int REQUEST_READ_BANCO = 1;
-    private static final int REQUEST_WRITE_BANCO = 2;
     private Bundle savedInstanceState;
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
 
@@ -119,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupToolbar();
         setupNavigationDrawer();
         setupMenuPrincipal();
-        presenter = new ActivityMainPresenter(this);
+        ActivityMainPresenter presenter = new ActivityMainPresenter(this);
         if(savedInstanceState!= null){
             proprietarioVisivel = savedInstanceState.getParcelable(SAVED_PROPRIETARIO);
             proprietarios = savedInstanceState.getParcelableArrayList(SAVED_PROPRIETARIOS);
@@ -189,7 +185,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if(!estaVisivelMenuPrincipal){
                     setupMenuPrincipal();
                 }else{
@@ -297,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void inflaFragment(Fragment fragment){
-        fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container,fragment);
         fragmentTransaction.addToBackStack(null);
