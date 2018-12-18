@@ -1,18 +1,27 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.CardView;
@@ -31,17 +40,23 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.Deta
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ProdutosFragment;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ActivityMainContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Proprietario;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ActivityMainPresenter;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import static android.os.Build.VERSION_CODES.M;
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityMainContrato.View, ActivityCompat.OnRequestPermissionsResultCallback {
 
 
     private static final String SAVED_PROPRIETARIOS = "proprietarios";
+
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -56,6 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Proprietario proprietarioVisivel;
     private ActivityMainPresenter presenter;
     private static final String SAVED_PROPRIETARIO = "proprietario_visivel";
+    private static final int REQUEST_READ_BANCO = 1;
+    private static final int REQUEST_WRITE_BANCO = 2;
+    private Bundle savedInstanceState;
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
+    private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
+            Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE };
+
 
 
     public String getPathDataBase() {
@@ -66,20 +89,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        setContentView(R.layout.activity_main);
+        this.savedInstanceState = savedInstanceState;
+
+
+        checkPermissions();
+
+
+
+    }
+
+
+
+
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+        for (final String permission : REQUIRED_SDK_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_SDK_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_SDK_PERMISSIONS,
+                    grantResults);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                for (int index = permissions.length - 1; index >= 0; --index) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+                        alertDialogMsgErroPermissao();
+                        return;
+                    }
+                }
+                setupOnCreate();
+                break;
+        }
+    }
+
+    private void setupOnCreate(){
         setupFindViewByIds();
         setupToolbar();
         setupNavigationDrawer();
         setupMenuPrincipal();
-
-        presenter = new ActivityMainPresenter();
-
+        presenter = new ActivityMainPresenter(this);
         if(savedInstanceState!= null){
             proprietarioVisivel = savedInstanceState.getParcelable(SAVED_PROPRIETARIO);
             proprietarios = savedInstanceState.getParcelableArrayList(SAVED_PROPRIETARIOS);
         }else{
-            presenter.buscaBancosDisponiveis(proprietarios, getApplicationContext().getApplicationInfo().dataDir);
+            presenter.buscaBancosDisponiveis(proprietarios,"/sdcard");
             presenter.getProprietarios(proprietarios, getApplicationContext());
             proprietarioVisivel = proprietarios.get(0);
         }
@@ -89,8 +159,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(savedInstanceState==null){
             inflaFragment(ProdutosFragment.newInstance());
         }
-
     }
+
+
+
+    private void alertDialogMsgErroPermissao(){
+        new AlertDialog.Builder(this).setTitle("Permissões negadas").
+                setMessage("Não será possivel continuar com a aplicação. O aplicativo será fechado.")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .show();
+    }
+
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -240,7 +325,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container,fragment);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
 

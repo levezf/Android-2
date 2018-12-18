@@ -12,7 +12,6 @@ public interface ActivityMainContrato {
 
 
     interface View{
-
     }
     interface Model{
         void buscaDadosDoProprietario(Proprietario proprietario, Context context);

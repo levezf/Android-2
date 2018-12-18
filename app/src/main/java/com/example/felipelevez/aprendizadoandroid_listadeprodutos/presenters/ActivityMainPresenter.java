@@ -1,6 +1,10 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProprietarioDAO;
@@ -14,6 +18,12 @@ import java.util.ArrayList;
 public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
 
     private ActivityMainContrato.Model model;
+    private ActivityMainContrato.View view;
+
+
+    public ActivityMainPresenter(ActivityMainContrato.View view) {
+        this.view = view;
+    }
 
     public void getProprietarios(ArrayList<Proprietario> proprietarios, Context context){
 
@@ -26,6 +36,9 @@ public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
 
     @Override
     public void buscaBancosDisponiveis(ArrayList<Proprietario> proprietarios, String path) {
+
+
+
         path += "/databases";
         String pathDataBase = path;
 
@@ -37,4 +50,5 @@ public class ActivityMainPresenter implements ActivityMainContrato.Presenter {
             }
         }
     }
+
 }
