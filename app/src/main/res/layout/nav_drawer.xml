@@ -27,7 +27,6 @@ android:orientation="vertical">
             android:paddingBottom="@dimen/activity_vertical_margin"
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-
             <ImageView
                 android:id="@+id/imagem_drawer"
                 android:layout_width="wrap_content"
@@ -48,7 +47,8 @@ android:orientation="vertical">
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toTopOf="@id/nome_cliente_banco"
                 app:layout_constraintLeft_toLeftOf="@id/imagem_drawer"
-                app:layout_constraintStart_toStartOf="@id/imagem_drawer"/>
+                app:layout_constraintStart_toStartOf="@id/imagem_drawer"
+                tools:text="Felipe Levez"/>
 
             <TextView
                 android:id="@+id/nome_cliente_banco"
@@ -58,7 +58,8 @@ android:orientation="vertical">
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/arrow"
                 app:layout_constraintLeft_toLeftOf="@id/cnpj_banco"
-                app:layout_constraintStart_toStartOf="@id/cnpj_banco" />
+                app:layout_constraintStart_toStartOf="@id/cnpj_banco"
+                tools:text="Estudante de ADS"/>
 
             <ImageView
                 android:id="@+id/arrow"
@@ -76,8 +77,6 @@ android:orientation="vertical">
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
-
-
 
     <FrameLayout
         android:id="@+id/frame"
