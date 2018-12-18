@@ -1,6 +1,5 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.database;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

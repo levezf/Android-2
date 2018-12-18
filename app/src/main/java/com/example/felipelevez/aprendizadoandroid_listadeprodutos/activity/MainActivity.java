@@ -1,17 +1,11 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.activity;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -23,34 +17,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.DetailsClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaClienteFragment;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ListaProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.ProdutosFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ActivityMainContrato;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Proprietario;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.ActivityMainPresenter;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.os.Build.VERSION_CODES.M;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityMainContrato.View, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -149,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             proprietarioVisivel = savedInstanceState.getParcelable(SAVED_PROPRIETARIO);
             proprietarios = savedInstanceState.getParcelableArrayList(SAVED_PROPRIETARIOS);
         }else{
-            presenter.buscaBancosDisponiveis(proprietarios,"/sdcard");
+            presenter.buscaBancosDisponiveis(proprietarios,Environment.getExternalStorageDirectory().getPath());
+
             presenter.getProprietarios(proprietarios, getApplicationContext());
             proprietarioVisivel = proprietarios.get(0);
         }

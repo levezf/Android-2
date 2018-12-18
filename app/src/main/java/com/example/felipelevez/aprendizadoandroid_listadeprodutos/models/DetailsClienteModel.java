@@ -3,11 +3,7 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.models;
 import android.content.Context;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ClienteDAO;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments.DetailsClienteFragment;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaClienteContrato;
-
-import java.util.ArrayList;
 
 public class DetailsClienteModel  implements  DetailsClienteContrato.Parent.Model{
 

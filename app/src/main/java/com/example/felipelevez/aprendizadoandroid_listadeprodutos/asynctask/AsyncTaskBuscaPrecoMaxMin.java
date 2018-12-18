@@ -3,12 +3,9 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
-
-import static android.content.ContentValues.TAG;
 
 public class AsyncTaskBuscaPrecoMaxMin extends AsyncTask<Void, Produto, Void> {
 

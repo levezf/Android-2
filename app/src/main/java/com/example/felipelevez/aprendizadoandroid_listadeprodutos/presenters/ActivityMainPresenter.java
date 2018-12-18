@@ -1,13 +1,7 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
 
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.database.ProprietarioDAO;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ActivityMainContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.ActivityMainModel;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Proprietario;

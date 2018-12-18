@@ -1,20 +1,20 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.fragments;
 
-        import android.os.Bundle;
-        import android.support.annotation.NonNull;
-        import android.support.annotation.Nullable;
-        import android.support.v4.app.Fragment;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.EditText;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
 
-        import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
-        import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
-        import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
-        import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClienteItensTabsPresenter;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.R;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.DetailsClienteContrato;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Cliente;
+import com.example.felipelevez.aprendizadoandroid_listadeprodutos.presenters.DetailsClienteItensTabsPresenter;
 
-        import java.io.Serializable;
+import java.io.Serializable;
 
 
 public class DetailsClienteEnderecoFragment extends Fragment implements DetailsClienteContrato.ItensTabs.View, Serializable {

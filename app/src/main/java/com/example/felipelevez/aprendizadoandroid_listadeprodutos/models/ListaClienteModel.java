@@ -10,8 +10,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static android.os.AsyncTask.THREAD_POOL_EXECUTOR;
-
 public class ListaClienteModel implements ListaClienteContrato.Model {
 
     private ClienteDAO clienteDAO;

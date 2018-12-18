@@ -2,7 +2,6 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface ListaProdutosContrato {

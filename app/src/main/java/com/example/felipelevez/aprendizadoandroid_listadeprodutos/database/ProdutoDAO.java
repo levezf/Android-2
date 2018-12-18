@@ -3,15 +3,12 @@ package com.example.felipelevez.aprendizadoandroid_listadeprodutos.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.asynctask.AsyncTaskBuscaProdutos;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ListaProdutosContrato;
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces.ProdutoDAOContrato;
-import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto;
 
 import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

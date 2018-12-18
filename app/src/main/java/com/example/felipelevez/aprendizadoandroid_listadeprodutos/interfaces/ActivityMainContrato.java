@@ -1,11 +1,9 @@
 package com.example.felipelevez.aprendizadoandroid_listadeprodutos.interfaces;
 
-import android.content.ContentValues;
 import android.content.Context;
 
 import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Proprietario;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public interface ActivityMainContrato {
