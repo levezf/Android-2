@@ -39,9 +39,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ActivityMainContrato.View, ActivityCompat.OnRequestPermissionsResultCallback {
 
-
     private static final String SAVED_PROPRIETARIOS = "proprietarios";
-
     private FragmentManager fragmentManager;
     private Toolbar toolbar;
     private DrawerLayout drawer;
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE };
 
 
-
     public String getPathDataBase() {
         return proprietarioVisivel.getLocalBanco();
     }
@@ -78,15 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         this.savedInstanceState = savedInstanceState;
 
-
         checkPermissions();
-
-
-
     }
-
-
-
 
     protected void checkPermissions() {
         final List<String> missingPermissions = new ArrayList<>();
