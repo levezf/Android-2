@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ArrayList<Proprietario> proprietarios = new ArrayList<>();
     private CardView header;
     private Proprietario proprietarioVisivel;
-    private static final String SAVED_PROPRIETARIO = "proprietario_visivel";
+    private static final String SAVED_PROPRIETARIO_VISIVEL = "proprietario_visivel";
     private Bundle savedInstanceState;
     private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
     private static final String[] REQUIRED_SDK_PERMISSIONS = new String[] {
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupMenuPrincipal();
         ActivityMainPresenter presenter = new ActivityMainPresenter(this);
         if(savedInstanceState!= null){
-            proprietarioVisivel = savedInstanceState.getParcelable(SAVED_PROPRIETARIO);
+            proprietarioVisivel = savedInstanceState.getParcelable(SAVED_PROPRIETARIO_VISIVEL);
             proprietarios = savedInstanceState.getParcelableArrayList(SAVED_PROPRIETARIOS);
         }else{
             presenter.buscaBancosDisponiveis(proprietarios,Environment.getExternalStorageDirectory().getPath());
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(SAVED_PROPRIETARIO, proprietarioVisivel);
+        outState.putParcelable(SAVED_PROPRIETARIO_VISIVEL, proprietarioVisivel);
         outState.putParcelableArrayList(SAVED_PROPRIETARIOS, proprietarios);
     }
 
