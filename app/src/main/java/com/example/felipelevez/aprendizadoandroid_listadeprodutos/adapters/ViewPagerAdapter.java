@@ -25,11 +25,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-       /* Fragment fragment = getItem(position);
-        FragmentTransaction trans = manager.beginTransaction();
-        trans.add(container.getId(),fragment);
-        trans.commit();*/
-        //return fragment;
+
         Object ret = super.instantiateItem(container, position);
         fragmentList.set(position, (Fragment) ret);
         return ret;

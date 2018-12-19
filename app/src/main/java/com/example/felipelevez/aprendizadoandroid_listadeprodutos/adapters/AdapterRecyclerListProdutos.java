@@ -144,7 +144,7 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         this.produtoClickListener = produtoClickListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView tipoLista;
         private final TextView codigoProduto;
@@ -158,7 +158,7 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
 
         private final View itemView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             tipoLista = itemView.findViewById(R.id.tv_tipo_lista);
             codigoProduto = itemView.findViewById(R.id.tv_codigo_produto);
@@ -170,9 +170,6 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
             progressBarPrecos = itemView.findViewById(R.id.progressBarPrecos);
             progressBarEstoque = itemView.findViewById(R.id.progressBarEstoque);
             this.itemView = itemView;
-
-
-
         }
 
         private void bindClick(final int position) {
