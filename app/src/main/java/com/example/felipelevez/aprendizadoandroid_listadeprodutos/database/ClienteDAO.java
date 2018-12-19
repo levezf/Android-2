@@ -102,14 +102,6 @@ public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
 
     @Override
     public Cliente bindCliente(Cursor cursor) {
-        /*return new Cliente(
-                cursor.getString(cursor.getColumnIndex(COLUNA_CODIGO_CLIENTE)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_NOME)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_EMAIL)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_TELEFONE)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_CNPJ)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_ENDERECO_NUMERO)),
-                cursor.getString(cursor.getColumnIndex(COLUNA_ENDERECO_RUA)));*/
         return new Cliente(
                 cursor.getString(5),
                 cursor.getString(0),

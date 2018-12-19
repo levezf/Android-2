@@ -35,7 +35,6 @@ public class ProdutosFragment extends Fragment {
         assert getActivity()!=null;
         ((MainActivity)getActivity()).setupNavigationDrawer();
 
-
         setupNavigationTabs(view);
 
         return view;
