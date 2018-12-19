@@ -77,7 +77,7 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
 
 
         }
-        setupNavigationTabs(view);
+        setupNavigationTabs();
         presenter = new DetailsClientePresenter(this, getContext());
         executaAcaoBotaoSalvar();
 
@@ -170,7 +170,7 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
         voltar();
     }
 
-    private void setupNavigationTabs(View view){
+    private void setupNavigationTabs(){
 
         setupViewPager();
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
