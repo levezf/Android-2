@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
     }
+
     private void setupOnCreate(){
         setupFindViewByIds();
         setupToolbar();
@@ -209,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp);
         toggle.setDrawerIndicatorEnabled(false);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().popBackStack();
@@ -222,11 +222,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Fragment currentFragmentParent;
+            Fragment currentFragment;
 
-            currentFragmentParent = getSupportFragmentManager().findFragmentById(R.id.container);
+            currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
 
-            if(currentFragmentParent instanceof  ListaClienteFragment  ||  currentFragmentParent instanceof DetailsClienteFragment){
+            if(currentFragment instanceof  ListaClienteFragment  ||  currentFragment instanceof DetailsClienteFragment){
 
                 getSupportFragmentManager().popBackStackImmediate();
 
