@@ -28,9 +28,6 @@ public class DetailsClienteFragment extends Fragment implements DetailsClienteCo
     private static final String EXTRA_CLIENTE = "cliente";
     private static final String EXTRA_POSITION = "position";
     private static final String ARG_ADAPTER = "adapter_list";
-    private static final String EXTRA_FRAGMENT_DADOS = "dados_fragment";
-    private static final String EXTRA_FRAGMENT_EMAIL = "email_fragment";
-    private static final String EXTRA_FRAGMENT_ENDERECO = "endereco_fragment";
     private Cliente cliente;
     private int position_lista;
     private View view;
