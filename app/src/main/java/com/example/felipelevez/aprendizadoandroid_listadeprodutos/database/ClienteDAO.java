@@ -102,6 +102,7 @@ public class ClienteDAO extends SqliteConexaoDAO implements ClienteDAOContrato{
 
     @Override
     public Cliente bindCliente(Cursor cursor) {
+
         return new Cliente(
                 cursor.getString(5),
                 cursor.getString(0),
