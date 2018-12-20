@@ -131,8 +131,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void alertDialogMsgErroPermissao(){
-        new AlertDialog.Builder(this).setTitle("Permissões negadas").
-                setMessage("Não será possivel continuar com a aplicação. O aplicativo será fechado.")
+        new AlertDialog.Builder(this).setTitle(R.string.msg_titulo_permissao_negada).
+                setMessage(R.string.msg_permissao_negada)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

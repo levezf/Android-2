@@ -22,4 +22,6 @@
     <string name="tab_email">E-MAIL</string>
     <string name="tab_endereco">ENDEREÇO</string>
     <string name="altera_o_de_menus">Alteração de menus</string>
+    <string name="msg_permissao_negada">Não será possivel continuar com a aplicação. O aplicativo será fechado.</string>
+    <string name="msg_titulo_permissao_negada">Permissões negadas</string>
 </resources>
