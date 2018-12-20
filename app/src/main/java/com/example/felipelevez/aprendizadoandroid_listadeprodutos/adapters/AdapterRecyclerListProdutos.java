@@ -16,7 +16,6 @@ import com.example.felipelevez.aprendizadoandroid_listadeprodutos.models.Produto
 import java.util.ArrayList;
 import java.util.Locale;
 
-
 public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRecyclerListProdutos.ViewHolder>{
 
     private ArrayList<Produto> produtos;
