@@ -45,10 +45,8 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         viewHolder.codigoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getCodigo()));
 
-
         viewHolder.descricaoProduto.setText(String.format(Locale.getDefault(),"%s",
                 produtos.get(i).getDescricao()));
-
 
         if(produtos.get(i).getValorMax() == null || produtos.get(i).getValorMin() == null ){
 
@@ -68,13 +66,11 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
             viewHolder.progressBarPrecos.setVisibility(View.INVISIBLE);
         }
 
-
         if(produtos.get(i).getQtdEstoque() == -1 || produtos.get(i).getUniVenda() == null ){
 
             viewHolder.qtdUnidadeProduto.setVisibility(View.INVISIBLE);
             viewHolder.unidadeProduto.setVisibility(View.INVISIBLE);
             viewHolder.progressBarEstoque.setVisibility(View.VISIBLE);
-
 
         }else{
             viewHolder.unidadeProduto.setText(String.format(Locale.getDefault(), "%s",
@@ -106,7 +102,6 @@ public class AdapterRecyclerListProdutos extends RecyclerView.Adapter<AdapterRec
         }
 
         viewHolder.tipoLista.setTextColor(color);
-
 
         viewHolder.bindClick(i);
     }
