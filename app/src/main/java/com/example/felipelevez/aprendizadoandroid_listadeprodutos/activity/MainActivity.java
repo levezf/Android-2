@@ -249,13 +249,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(item.getGroupId() == R.id.menu_drawer){
+            Fragment currentFragment;
+            currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+
             switch (id){
                 case R.id.drawer_produtos:
-                    inflaFragment(ProdutosFragment.newInstance());
+                    if(!(currentFragment instanceof ProdutosFragment))
+                        inflaFragment(ProdutosFragment.newInstance());
+
                     break;
 
                 case R.id.drawer_clientes:
-                    inflaFragment(ListaClienteFragment.newInstance());
+                    if(!(currentFragment instanceof ListaClienteFragment))
+                        inflaFragment(ListaClienteFragment.newInstance());
                     break;
 
             }
@@ -274,6 +280,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 
     private void setupHeaderDrawerProprietario(Proprietario proprietarioVisivel) {
 
